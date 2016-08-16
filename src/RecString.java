@@ -1,7 +1,7 @@
 public class RecString {
 
 	public static int StrLen(String s){
-		if(s.equals("")||s==null){
+		if(s.equals("")){
 			return 0;
 		}
 		else{
