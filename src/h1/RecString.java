@@ -1,3 +1,4 @@
+package h1;
 public class RecString {
 
 	public static int StrLen(String s){

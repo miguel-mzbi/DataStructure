@@ -1,3 +1,4 @@
+package h1;
 
 public class MainH1 {
 
@@ -12,10 +13,10 @@ public class MainH1 {
 		System.out.println(x);
 		
 		System.out.println("Recursive 2D");
-		int[] h = {1,2,3,4,2,2,1};
+		int[] h = {7,7,7,7,7,7,5,4,3};
 		int y = Peak.OneDRecursive(h);
 		System.out.println(y);
-		int[] i = {2,7,87,2,2,1};
+		int[] i = {3,94,87,2,2,1};
 		y = Peak.OneDRecursive(i);
 		System.out.println(y);
 		int[] j = {87};
