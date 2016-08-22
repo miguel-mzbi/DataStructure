@@ -13,7 +13,7 @@ public class MainH1 {
 		System.out.println(x);
 		
 		System.out.println("Recursive 2D");
-		int[] h = {7,7,7,7,7,7,5,4,3};
+		int[] h = {77,67,57,47,37,27,5,4,3};
 		int y = Peak.OneDRecursive(h);
 		System.out.println(y);
 		int[] i = {3,94,87,2,2,1};

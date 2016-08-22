@@ -4,27 +4,27 @@ public class Peak {
 
 	public static int OneDRecursive(int[] a){
 		int n=a.length;
-		return OneDRecursive(a, n);
+		return OneDRecursive1(a, n);
 	}
 	public static int getMidIndex(int n){
 		int i = (n%2==0)?(n/2):(n+1)/2;
 		return i;
 	}
-	public static int OneDRecursive(int[] a, int n){
-		return OneDRecursive(a, n, getMidIndex(n));
+	public static int OneDRecursive1(int[] a, int n){
+		return OneDRecursive2(a, n, getMidIndex(n));
 	}
-	public static int OneDRecursive(int[] a, int n, int i){
-		if(i == n-1){
-			i=1;
+	public static int OneDRecursive2(int[] a, int n, int i){
+		if(n==0){
+			return 0;
 		}
-		if(i == 0){
-			i = n-2;
+		else if(i == n-1){
+			return a[n-1];
 		}
-		if(n==1){
+		else if(i == 0){
 			return a[0];
 		}
-		else if(n==0){
-			return 0;
+		else if(n==1){
+			return a[0];
 		}
 		else if(a[i-1]<=a[i] && a[i]<=a[i+1]){
 //			while(a[i]==a[i-1] && a[i]==a[i+1]){
@@ -33,10 +33,7 @@ public class Peak {
 //				}
 //				i++;
 //			}
-			if(a[i+1]== getMidIndex(n)){
-				return a[i];
-			}
-			return OneDRecursive(a, n, i+1);
+			return OneDRecursive2(a, n, i+1);
 		}
 		else if(a[i-1]>=a[i] && a[i]>=a[i+1]){
 //			while(a[i]==a[i-1] && a[i]==a[i+1]){
@@ -45,7 +42,7 @@ public class Peak {
 //				}
 //				i--;
 //			}
-			return OneDRecursive(a, n, i-1);
+			return OneDRecursive2(a, n, i-1);
 		}
 		else{
 		//else if(a[i-1]<=a[i] && a[i]>=a[i+1]){
