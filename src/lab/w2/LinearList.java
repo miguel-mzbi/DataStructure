@@ -7,5 +7,5 @@ public interface LinearList <Item> {
 	public int indexOf(Item item);
 	public Item remove(int index);
 	public void add(int index, Item item);
-	public String toString();
+	public String output();
 }

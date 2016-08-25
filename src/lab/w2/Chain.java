@@ -16,9 +16,10 @@ public class Chain<Item> implements LinearList<Item>{
 	public boolean isEmpty() {
 		return this.size == 0;
 	}
+	
 	/**
 	 * size - returns size of chain
-	 * @return int with the size of the chain
+	 * @return integer with the size of the chain
 	 */
 	public int size() {
 		return this.size;
@@ -54,12 +55,36 @@ public class Chain<Item> implements LinearList<Item>{
 		return -1;
 	}
 
-	@Override
+	/**
+	 * remove - removes node at selected index
+	 * @return element of removed node
+	 */
 	public Item remove(int index) {
-		return null;
+		if(index<0 || index>=this.size){
+			throw new IndexOutOfBoundsException("Index out of range");
+		}
+		ChainNode<Item> nodeRemove;
+		if(index == 0){
+			nodeRemove = this.firstNode;
+			this.firstNode = nodeRemove.next;
+		}
+		else{
+			ChainNode<Item> prev, nxt;
+			prev = this.firstNode;
+			for(int i = 0; i<index-1;i++){
+				prev=prev.next;
+			}
+			nodeRemove = prev.next;
+			nxt = nodeRemove.next;
+			prev.next=nxt;
+		}
+		this.size--;
+		return nodeRemove.element;
 	}
-
-	@Override
+	
+	/**
+	 * add - inserts node to selected index
+	 */
 	public void add(int index, Item item) {
 		if(index<0 || index>this.size){
 			throw new IndexOutOfBoundsException("Index out of range");
@@ -81,6 +106,20 @@ public class Chain<Item> implements LinearList<Item>{
 		this.size++;
 	}
 	
+	/**
+	 * Returns all nodes's elements as a string
+	 * @return elements of all nodes as string
+	 */
+	public String output() {
+		String op = "";
+		ChainNode<Item> temp = this.firstNode;
+		for(int i = 0; i<this.size; i++){
+			op = op + "[" + temp.element.toString()+ "]";
+			temp = temp.next;
+		}
+		return op;
+	}
+	
 	private static class ChainNode<Item>{
 		Item element;
 		ChainNode<Item> next;
@@ -89,6 +128,7 @@ public class Chain<Item> implements LinearList<Item>{
 			this.element = null;
 			this.next = null;
 		}
+		@SuppressWarnings("unused")
 		public ChainNode(Item element){
 			this.element = element;
 			this.next = null;
@@ -96,8 +136,6 @@ public class Chain<Item> implements LinearList<Item>{
 		public ChainNode(Item element, ChainNode<Item> next){
 			this.element = element;
 			this.next = next;
-		}
-		
+		}	
 	}
-	
 }
