@@ -4,6 +4,7 @@ public class MainChain {
 
 	public static void main(String[] args){
 		Chain<Integer> linkList = new Chain<Integer>();
+		
 		try{
 			linkList.add(0, 2);
 			linkList.add(0, 1);
