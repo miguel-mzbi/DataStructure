@@ -5,13 +5,16 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 	protected Item element[];
 	protected int size;
 	protected final static int defaultSize = 100;
+	private int selectedSize;
 
 	public ArrayLinearList(){
 		this.size = 0;
-		this.element = (Item[]) new Object[this.defaultSize];
+		this.selectedSize = defaultSize;
+		this.element = (Item[]) new Object[defaultSize];
 	}
 	public ArrayLinearList(int newSize){
 		this.size = 0;
+		this.selectedSize = newSize;
 		this.element = (Item[]) new Object[newSize];
 	}
 	
@@ -79,10 +82,16 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 	 * add - insert x at the position index , and elements with theIndex ≥ index have their index increased by 1.
 	 */
 	public void add(int index, Item item) {
+		if(this.size == this.selectedSize){
+			resize();
+		}
 		if(index<0 || index>this.size){
 			throw new IndexOutOfBoundsException("Index out of range");
 		}
-		if(this.size==index){
+		else if(this.size==0){
+			this.element[0]=item;
+		}
+		else if(this.size==index){
 			this.element[index]=item;
 		}
 		else{
@@ -94,10 +103,24 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		this.size++;
 	}
 
-	@Override
+	/**
+	 * Returns all as a string
+	 * @return items of all elements inside element as string
+	 */
 	public String output() {
-		// TODO Auto-generated method stub
-		return null;
+		String op = "";
+		for(int i = 0; i<this.size; i++){
+			op = op + "[" + this.element[i].toString() + "]";
+		}
+		return op;
+	}
+	
+	private void resize(){
+		@SuppressWarnings("unchecked")
+		Item[] newArray = (Item[]) new Object[this.selectedSize*2];
+		System.arraycopy(this.element, 0, newArray, 0, this.size);
+		this.element=newArray;
+		this.selectedSize=this.selectedSize*2;
 	}
 
 }
