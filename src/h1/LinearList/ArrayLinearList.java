@@ -7,11 +7,13 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 	protected final static int defaultSize = 100;
 	private int selectedSize;
 
+	@SuppressWarnings("unchecked")
 	public ArrayLinearList(){
 		this.size = 0;
 		this.selectedSize = defaultSize;
 		this.element = (Item[]) new Object[defaultSize];
 	}
+	@SuppressWarnings("unchecked")
 	public ArrayLinearList(int newSize){
 		this.size = 0;
 		this.selectedSize = newSize;
