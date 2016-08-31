@@ -1,4 +1,4 @@
-package h1.LinearList;
+package linearList;
 
 public class ArrayLinearList<Item> implements LinearList<Item>{
 	

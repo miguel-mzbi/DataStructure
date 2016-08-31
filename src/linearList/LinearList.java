@@ -1,4 +1,4 @@
-package h1.LinearList;
+package linearList;
 
 public interface LinearList<Item> {
 	public boolean isEmpty();

@@ -1,6 +1,6 @@
-package h1.LinearList;
+package linearList;
 
-public class MainArrayLinearList {
+public class ArrayLinearListMain {
 
 	public static void main(String[] args) {
 		ArrayLinearList<Integer> a = new ArrayLinearList<Integer>();
