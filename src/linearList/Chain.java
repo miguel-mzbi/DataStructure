@@ -1,4 +1,4 @@
-package lab.w2;
+package linearList;
 
 public class Chain<Item> implements LinearList<Item>{
 	protected ChainNode<Item> firstNode;
