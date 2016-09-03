@@ -6,7 +6,7 @@ public class ArrayLinearListWithIterator<Item> implements LinearList<Item>{
 	
 	protected Item element[];
 	protected int size;
-	protected final static int defaultSize = 10;
+	protected final static int defaultSize = 100;
 	private int selectedSize;
 
 	@SuppressWarnings("unchecked")
@@ -133,18 +133,19 @@ public class ArrayLinearListWithIterator<Item> implements LinearList<Item>{
 	protected class IteratorArray implements Iterator<Item>{
 		private int nextIndex ;
 		private boolean wasNextCalled ;
+		
 		protected IteratorArray() {
 			this.nextIndex = 0;
 			this.wasNextCalled = false;
 		}
 		public boolean hasNext(){
-			return (this.nextIndex < ArrayLinearListWithIterator.this.size);
+			return (this.nextIndex < size);
 		}
 
 		public Item next(){
 			this.nextIndex++;
 			this.wasNextCalled = true;
-			return ArrayLinearListWithIterator.this.element[this.nextIndex-1];
+			return element[this.nextIndex-1];
 		}
 		
 		public void remove(){
