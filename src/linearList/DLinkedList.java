@@ -124,7 +124,10 @@ public class DLinkedList<Item> implements LinearList<Item> {
 		this.size--;
 		return nodeRemove.element;
 	}
-
+	
+	/**
+	 * add - add node with item to selected index
+	 */
 	public void add(int index, Item item) {
 		if(index<0 || index>this.size){
 			throw new IndexOutOfBoundsException("Index out of range");
@@ -148,7 +151,10 @@ public class DLinkedList<Item> implements LinearList<Item> {
 			this.size++;
 		}
 	}
-
+	/**
+	 * output - prints the elements of all the nodes
+	 * @return string of all node's elements
+	 */
 	public String output() {
 		StringBuilder out = new StringBuilder("[");
 		DNode<Item> temp = this.firstNode;
@@ -159,8 +165,7 @@ public class DLinkedList<Item> implements LinearList<Item> {
 			temp = temp.next;
 		}
 		out.append("]");
-		
-		return out.toString();
+		return (out.toString());
 	}
 	
 	private static class DNode<Item>{
