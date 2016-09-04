@@ -8,5 +8,4 @@ public interface LinearList<Item> {
 	public Item remove(int index);
 	public void add(int index, Item item);
 	public String output();
-
 }
