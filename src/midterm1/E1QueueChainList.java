@@ -11,26 +11,16 @@ public class E1QueueChainList<I> {
 	}
 
 	public boolean isEmpty() {
-		return this.size==0;
+		return false;
 	}
 	public int size() {
-		return this.size;
+		return 0;
 	}
 	public I front(){
-		if(isEmpty()){
-			throw new IndexOutOfBoundsException("Index out of range");
-		}
-		else{
-			return this.frontNode.element;
-		}
+		return null;
 	}
 	public I rear(){
-		if(isEmpty()){
-			throw new IndexOutOfBoundsException("Index out of range");
-		}
-		else{
-			return this.rearNode.element;
-		}
+		return null;
 	}
 	public void enqueue(I element){
 		if(this.size == 0){
@@ -64,6 +54,7 @@ public class E1QueueChainList<I> {
 	}
 	
 //	Method for reverse, using regular chain characteristics
+//	O(n)
 	private void dequeueAddPopEnqueue(){
 		E1QueueChainList<I> temp = new E1QueueChainList<I>();
 		int s = this.size;
@@ -79,7 +70,7 @@ public class E1QueueChainList<I> {
 	}
 	
 //	Not valid method useful for debugging
-	private String output() {
+	protected String output() {
 		String op = "";
 		Node<I> temp = this.frontNode;
 		for(int i = 1; i<=this.size; i++){

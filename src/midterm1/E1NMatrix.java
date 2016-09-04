@@ -5,11 +5,11 @@ public class E1NMatrix {
 	private int n;
 	private int zero = 0;
 	
-	/* 	   i=0 1 2  3	
-	 *	j=0[[1,0,0 ,5]
-	 * 	  1 [2,9,0 ,6]
-	 * 	  2 [3,0,10,7]
-	 * 	  3 [4,0,0 ,8]]
+	/* 	   i=1 2 3  4	
+	 *	j=1[[1,0,0 ,5]
+	 * 	  2 [2,9,0 ,6]
+	 * 	  3 [3,0,10,7]
+	 * 	  4 [4,0,0 ,8]]
 	 * 
 	 * index 0 1 2 3 4 5 6 7 8 9
 	 * 		[1,2,3,4,5,6,7,8,9,10]
@@ -30,16 +30,14 @@ public class E1NMatrix {
 		if(i<1 || i>this.n || j<1 || j>this.n){
 			throw new IndexOutOfBoundsException("Coord out of range");
 		}
-		i--;
-		j--;
-		if(i==0){
-			this.element[j]=value;
+		if(i==1){
+			this.element[j-1]=value;
 		}
-		else if(i==this.n-1){
-			this.element[this.n+j]=value;
+		else if(i==this.n){
+			this.element[this.n+j-1]=value;
 		}
 		else if(i==j){
-			this.element[2*this.n+j-1]=value;
+			this.element[2*this.n+j-2]=value;
 		}
 		else{
 			throw new IndexOutOfBoundsException("Coord should be 0");
