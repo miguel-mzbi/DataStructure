@@ -9,15 +9,27 @@ public class QueueChainList<I> {
 		this.frontNode= new Node<I>();
 		this.rearNode= new Node<I>();
 	}
-
+	
+	/**
+	 * isEmpty - returns true if chain is empty
+	 * @return boolean true if empty, false if not empty
+	 */
 	public boolean isEmpty() {
 		return this.size==0;
 	}
 	
+	/**
+	 * size - returns size of chain
+	 * @return integer with the size of the chain
+	 */
 	public int size() {
 		return this.size;
 	}
 	
+	/**
+	 * front - returns node at the front(left) of the queue
+	 * @return returns first node's element
+	 */
 	public I front(){
 		if(isEmpty()){
 			throw new IndexOutOfBoundsException("Index out of range");
@@ -27,6 +39,10 @@ public class QueueChainList<I> {
 		}
 	}
 	
+	/**
+	 * rear - returns node at the rear(right) of the queue
+	 * @return returns last node's element
+	 */
 	public I rear(){
 		if(isEmpty()){
 			throw new IndexOutOfBoundsException("Index out of range");
@@ -36,6 +52,9 @@ public class QueueChainList<I> {
 		}
 	}
 	
+	/**
+	 * enqueue - adds a node to the rear
+	 */
 	public void enqueue(I element){
 		if(this.size == 0){
 			Node<I> newNode = new Node<I>(element);
@@ -55,6 +74,10 @@ public class QueueChainList<I> {
 		this.size++;		
 	}
 	
+	/**
+	 * dequeue - removes node at the front
+	 * @return returns the removed node's element
+	 */
 	public I dequeue(){
 		if(this.isEmpty()){
 			throw new IndexOutOfBoundsException("EmptyList");
@@ -63,6 +86,17 @@ public class QueueChainList<I> {
 		this.frontNode= toRemove.next;
 		this.size--;
 		return toRemove.element;
+	}
+	
+//	Not valid method useful for debugging
+	protected String output() {
+		String op = "";
+		Node<I> temp = this.frontNode;
+		for(int i = 1; i<=this.size; i++){
+			op = op + "[" + temp.element.toString()+ "]";
+			temp = temp.next;
+		}
+		return op;
 	}
 	
 	private static class Node<I> {

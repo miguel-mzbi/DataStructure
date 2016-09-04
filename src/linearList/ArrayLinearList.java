@@ -117,6 +117,9 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 		return op;
 	}
 	
+	/**
+	 * Doubles the maximum size
+	 */
 	private void resize(){
 		@SuppressWarnings("unchecked")
 		Item[] newArray = (Item[]) new Object[this.selectedSize*2];
