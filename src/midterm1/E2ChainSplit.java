@@ -3,12 +3,12 @@ package midterm1;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class E2Chain<Item> {
+public class E2ChainSplit<Item> {
 	
 	protected ChainNode<Item> firstNode;
 	protected int size;
 	
-	public E2Chain(){
+	public E2ChainSplit(){
 		this.size = 0;
 		this.firstNode = new ChainNode<Item>();
 	}
@@ -86,8 +86,8 @@ public class E2Chain<Item> {
 	}
 	
 //	O(n)
-	public static void ThreeWaySplit(E2Chain<Integer> a, E2Chain<Integer> b, E2Chain<Integer> c, E2Chain<Integer> d){
-		E2Chain<Integer>.Itr it = a.new Itr();
+	public static void ThreeWaySplit(E2ChainSplit<Integer> a, E2ChainSplit<Integer> b, E2ChainSplit<Integer> c, E2ChainSplit<Integer> d){
+		E2ChainSplit<Integer>.Itr it = a.new Itr();
 		int i = 0;
 		b.makeEmpty();
 		c.makeEmpty();
@@ -108,10 +108,10 @@ public class E2Chain<Item> {
 	}
 	
 	public static void main(String[] args) {
-		E2Chain<Integer> a = new E2Chain<Integer>();
-		E2Chain<Integer> b = new E2Chain<Integer>();
-		E2Chain<Integer> c = new E2Chain<Integer>();
-		E2Chain<Integer> d = new E2Chain<Integer>();
+		E2ChainSplit<Integer> a = new E2ChainSplit<Integer>();
+		E2ChainSplit<Integer> b = new E2ChainSplit<Integer>();
+		E2ChainSplit<Integer> c = new E2ChainSplit<Integer>();
+		E2ChainSplit<Integer> d = new E2ChainSplit<Integer>();
 		a.append(1);
 		a.append(2);
 		a.append(3);
