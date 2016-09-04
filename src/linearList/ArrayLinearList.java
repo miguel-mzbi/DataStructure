@@ -85,7 +85,7 @@ public class ArrayLinearList<Item> implements LinearList<Item>{
 	 */
 	public void add(int index, Item item) {
 		if(this.size == this.selectedSize){
-			resize();
+			this.resize();
 		}
 		if(index<0 || index>this.size){
 			throw new IndexOutOfBoundsException("Index out of range");
