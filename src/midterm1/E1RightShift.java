@@ -1,6 +1,6 @@
 package midterm1;
 
-public class RightShiftE1{
+public class E1RightShift{
 	
 	//O(n);
 	public static int[] rightShift(int[] prevArray, int shift){

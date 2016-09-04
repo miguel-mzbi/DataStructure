@@ -1,6 +1,6 @@
 package midterm1;
 
-public class SortingE1<Item> implements LinearList<Item> {
+public class E1Sorting<Item> implements LinearList<Item> {
 	
 	protected ChainNode<Item> firstNode;
 	protected int size;
@@ -97,14 +97,14 @@ public class SortingE1<Item> implements LinearList<Item> {
 	}
 	
 	public static void main(String[] args){
-		SortingE1<Integer> chain = new SortingE1<Integer>();
+		E1Sorting<Integer> chain = new E1Sorting<Integer>();
 		chain.add(0,6);
 		chain.add(0,5);
 		chain.add(0,4);
 		chain.add(0,3);
 		System.out.println(chain.isSorted());
 		
-		SortingE1<Integer> chain2 = new SortingE1<Integer>();
+		E1Sorting<Integer> chain2 = new E1Sorting<Integer>();
 		chain2.add(0,4);
 		chain2.add(0,5);
 		chain2.add(0,4);

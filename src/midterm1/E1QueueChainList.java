@@ -1,10 +1,10 @@
 package midterm1;
 
-public class QueueChainListE1<I> {
+public class E1QueueChainList<I> {
 	protected int size;
 	protected Node<I> rearNode, frontNode;
 	
-	public QueueChainListE1(){
+	public E1QueueChainList(){
 		this.size=0;
 		this.frontNode= new Node<I>();
 		this.rearNode= new Node<I>();
@@ -65,7 +65,7 @@ public class QueueChainListE1<I> {
 	
 //	Method for reverse, using regular chain characteristics
 	private void dequeueAddPopEnqueue(){
-		QueueChainListE1<I> temp = new QueueChainListE1<I>();
+		E1QueueChainList<I> temp = new E1QueueChainList<I>();
 		int s = this.size;
 		for(int i= 0; i<s; i++){
 			Node<I> newFirstNode = new Node<I>(this.dequeue(), temp.frontNode);
@@ -108,7 +108,7 @@ public class QueueChainListE1<I> {
 	}
 	
 	public static void main(String[] args) {
-		QueueChainListE1<Integer> linkList = new QueueChainListE1<Integer>();
+		E1QueueChainList<Integer> linkList = new E1QueueChainList<Integer>();
 		try{
 			linkList.enqueue(0);
 			linkList.enqueue(1);

@@ -1,6 +1,6 @@
 package midterm1;
 
-public class NMatrixE1 {
+public class E1NMatrix {
 	private int[] element;
 	private int n;
 	private int zero = 0;
@@ -16,7 +16,7 @@ public class NMatrixE1 {
 	 *		   i=0  |  i=n  | i=j
 	 *			j	   n+j	 2n+i-1
 	 */
-	public NMatrixE1(int lenght){
+	public E1NMatrix(int lenght){
 		this.element = new int[3*lenght-2];
 		for(int i = 0; i < 3*lenght-2; i++){
 			this.element[i] = zero;
@@ -46,7 +46,7 @@ public class NMatrixE1 {
 		}
 	}
 	public static void main(String[] args){
-		NMatrixE1 nMatrix = new NMatrixE1(4);
+		E1NMatrix nMatrix = new E1NMatrix(4);
 		nMatrix.set(4, 4, 8);
 		nMatrix.set(1, 1, 1);
 		nMatrix.set(2, 2, 9);
