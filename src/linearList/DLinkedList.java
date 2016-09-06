@@ -180,8 +180,7 @@ public class DLinkedList<Item> implements LinearList<Item> {
 	}
 
 	protected class ListItr implements ListIterator<Item>{
-		private DNode<Item> lastVisitedNode;
-		private DNode<Item> nxt;
+		private DNode<Item> lastVisitedNode,nxt;
 		private int nextIndex;
 		
 		public ListItr(){
@@ -209,7 +208,7 @@ public class DLinkedList<Item> implements LinearList<Item> {
 		}
 
 		public Item next() {
-			if(!hasNext()){
+			if(!this.hasNext()){
 				throw new NoSuchElementException("No elements");
 			}
 			this.lastVisitedNode = this.nxt;
@@ -222,11 +221,11 @@ public class DLinkedList<Item> implements LinearList<Item> {
 			if(!hasNext()){
 				return size;
 			}
-			return this.nextIndex++;
+			return this.nextIndex;
 		}
 
 		public Item previous() {
-			if(!hasPrevious()){
+			if(!this.hasPrevious()){
 				throw new NoSuchElementException("No elements");
 			}
 			if(this.nxt==null){
@@ -241,10 +240,10 @@ public class DLinkedList<Item> implements LinearList<Item> {
 		}
 
 		public int previousIndex() {
-			if(!hasPrevious()){
+			if(!this.hasPrevious()){
 				return -1;
 			}
-			return this.previousIndex();
+			return this.nextIndex-1;
 		}
 
 		public void remove() {
