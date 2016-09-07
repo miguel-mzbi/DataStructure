@@ -1,5 +1,7 @@
 package linearList;
 
+import java.util.NoSuchElementException;
+
 public class QueueChainList<I> {
 	protected int size;
 	protected Node<I> rearNode, frontNode;
@@ -32,7 +34,7 @@ public class QueueChainList<I> {
 	 */
 	public I front(){
 		if(isEmpty()){
-			throw new IndexOutOfBoundsException("Index out of range");
+			throw new NoSuchElementException("Queue is empty");
 		}
 		else{
 			return this.frontNode.element;
@@ -45,7 +47,7 @@ public class QueueChainList<I> {
 	 */
 	public I rear(){
 		if(isEmpty()){
-			throw new IndexOutOfBoundsException("Index out of range");
+			throw new NoSuchElementException("Queue is empty");
 		}
 		else{
 			return this.rearNode.element;
@@ -80,7 +82,7 @@ public class QueueChainList<I> {
 	 */
 	public I dequeue(){
 		if(this.isEmpty()){
-			throw new IndexOutOfBoundsException("EmptyList");
+			throw new NoSuchElementException("Queue is empty");
 		}
 		Node<I> toRemove = this.frontNode;
 		this.frontNode= toRemove.next;
