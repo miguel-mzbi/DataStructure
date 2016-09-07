@@ -29,7 +29,7 @@ public class QueueCircularArrayList<Item> {
 	 * @return returns first element
 	 */
 	public Item front(){
-		if(isEmpty()){
+		if(this.isEmpty()){
 			throw new NoSuchElementException("Queue is empty");
 		}
 		else{
@@ -42,7 +42,7 @@ public class QueueCircularArrayList<Item> {
 	 * @return returns last element
 	 */
 	public Item rear(){
-		if(isEmpty()){
+		if(this.isEmpty()){
 			throw new NoSuchElementException("Queue is empty");
 		}
 		else{
@@ -57,7 +57,7 @@ public class QueueCircularArrayList<Item> {
 		if(this.size == this.element.length){
 			this.resize();
 		}
-		this.element[rear] = element;
+		this.element[this.rear] = element;
 		this.rear = (this.rear+1)%this.element.length;
 		this.size++;
 	}
@@ -90,6 +90,7 @@ public class QueueCircularArrayList<Item> {
 		}
 		this.front = 0;
 		this.rear = this.element.length;
+//		this.rear = this.size
 		this.element=newArray;		
 	}
 	

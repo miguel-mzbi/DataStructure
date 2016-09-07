@@ -33,6 +33,29 @@ public class QueueCircularArrayListMain {
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+		
+//		try {
+//			
+//			QC.enqueue(1);
+//			QC.enqueue(2);
+//			QC.enqueue(3);
+//			QC.enqueue(4);
+//			QC.enqueue(5);
+//			QC.enqueue(6);
+//			QC.enqueue(7);
+//			QC.enqueue(8);
+//			
+//			System.out.println(QC.output());
+//			
+//			System.out.println(QC.dequeue());
+//			System.out.println(QC.dequeue());
+//			System.out.println(QC.dequeue());
+//			System.out.println(QC.dequeue());
+//			
+//			
+//		}catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
 	}
 
 }
