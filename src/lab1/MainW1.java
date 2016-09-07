@@ -1,4 +1,4 @@
-package lab.w1;
+package lab1;
 
 public class MainW1 {
 	public static void main(String[] args) {

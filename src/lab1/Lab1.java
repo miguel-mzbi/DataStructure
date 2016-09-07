@@ -1,4 +1,4 @@
-package lab.w1;
+package lab1;
 
 public class Lab1 {
 //	Enumeración ascendiente
