@@ -1,0 +1,34 @@
+Test of time needed to process add and remove methods to a Chain List and an Array List
+Using computer with W10, Intel i7-4770 CPU @3.40GHz and 8.00 RAM
+
+Add n elements to a chain (Worst Case)
+
+n → 1 ≈ 0.017 milisecs
+n → 10 ≈ 0.021 milisecs
+n → 100 ≈ 0.078 milisecs
+n → 1000 ≈ 1.377 milisecs
+n → 10000 ≈ 65.278 milisecs
+
+Add n elements to the start of an array (Worst Case)
+
+n → 1 ≈ 0.017 milisecs
+n → 10 ≈ 0.023 milisecs
+n → 100 ≈ 0.104 milisecs
+n → 1000 ≈ 2.484 milisecs
+n → 10000 ≈ 38.756 milisecs
+
+Remove the n'th element of a chain (Worst Case)
+
+n → 1 ≈ 0.002 milisecs
+n → 10 ≈ 0.003 milisecs
+n → 100 ≈ 0.004 milisecs
+n → 1000 ≈ 0.013 milisecs
+n → 10000 ≈ 0.103 milisecs
+
+Remove the first element of an array (Worst Case)
+
+n → 1 ≈ 0.001 milisecs
+n → 10 ≈ 0.002 milisecs
+n → 100 ≈ 0.004 milisecs
+n → 1000 ≈ 0.021 milisecs
+n → 10000 ≈ 0.173 milisecs
