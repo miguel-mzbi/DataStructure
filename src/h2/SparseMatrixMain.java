@@ -22,11 +22,7 @@ public class SparseMatrixMain {
 		System.out.println();
 
 		System.out.println(SM.remove(1, 1));
-		System.out.println(SM.output());
-		
 		System.out.println(SM.remove(1, 2));
-		System.out.println(SM.output());
-
 		System.out.println(SM.remove(1, 3));
 		System.out.println(SM.output());
 		
@@ -49,7 +45,6 @@ public class SparseMatrixMain {
 				SM.add(j, i, 9);
 			}
 		}
-		System.out.println(SM.output());
 
 		for(int j = 1; j <= 7; j++){
 			SM.remove(j, j);
