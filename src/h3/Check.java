@@ -4,7 +4,9 @@ public class Check {
 	
 	public static boolean Iterative(Chain<Character> c){
 		ChainStack<Character> ones = new ChainStack<Character>();
-		int s = c.size();
+		if(c.size()%2 == 1){
+			return false;
+		}
 		for(int i = 0; i < c.size(); i++){
 			if(c.get(i) == '1'){
 				ones.push(c.remove(i));
