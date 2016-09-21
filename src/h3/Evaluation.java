@@ -15,19 +15,22 @@ public class Evaluation {
 				chainNum.add(i-l, c.remove(0));
 			}
 		}
-		return Recursive(chainSym, chainNum);
+		return Recursive(chainSym, chainNum, 0);
 	}
-	public static int Recursive(Chain<Character> sym, Chain<Character> num){
-		int r = Character.getNumericValue(num.remove(0));
-		while(!num.isEmpty()){
+	public static int Recursive(Chain<Character> sym, Chain<Character> num, int res){
+		if(sym.size() != num.size()){
+			res += Character.getNumericValue(num.remove(0));
+		}
+		else if (!num.isEmpty()){
 			if(sym.remove(0) == '+'){
-				r += Character.getNumericValue(num.remove(0));
+				res += Character.getNumericValue(num.remove(0));
 			}
 			else{
-				r -= Character.getNumericValue(num.remove(0));
+				res -= Character.getNumericValue(num.remove(0));
 			}
+			return Recursive(sym, num, res);
 		}
-		return r;
+		return res;
 	}
 	
 	public static int Iterative(Chain<Character> c){
