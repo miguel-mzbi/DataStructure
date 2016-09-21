@@ -11,6 +11,7 @@ public class HashTable<Key, Value> implements DictionaryInterface<Key, Value>{
 		this(97);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HashTable(int initCapacity){
 		this.capacity = initCapacity;
 		this.size = 0;
