@@ -66,6 +66,7 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 		for(int i = pos; this.table[i] != null; i = ++i%this.capacity){
 			if(this.table[i].key.equals(k)){
 				toRemove = this.table[i].value;
+				this.table[i] = null;
 				removedSpace = i;
 			}
 			else if(removedSpace != -1 && this.hash(this.table[i].key) == pos){
@@ -73,17 +74,23 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 				this.table[i] = null;
 				removedSpace = i;
 			}
+//			else if()
 		}
-		for(int i = ++removedSpace%this.capacity; i != -1; i = ++i%this.capacity){
-			if(this.hash(this.table[i].key) <= removedSpace){
-				this.table[removedSpace] = this.table[i];
-				this.table[i] = null;
-				removedSpace = i;
+		for(int i = (1+removedSpace)%this.capacity; i != -1; i = ++i%this.capacity){
+			if(this.table[i] != null && this.hash(this.table[i].key) == i){
+				continue;
 			}
 			else if(this.table[i] == null){
 				break;
 			}
+			else if(this.hash(this.table[i].key) <= removedSpace){
+				this.table[removedSpace] = this.table[i];
+				this.table[i] = null;
+				removedSpace = i;
+			}
+			
 		}
+		this.size--;
 		return toRemove;
 	}
 
@@ -125,6 +132,19 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 		for(int i = 0; i < this.capacity; i++){
 			this.table[i] = null;
 		}
+		this.size = 0;
+	}
+//	Method not valid, only for testing
+	public void output(){
+		for(int i = 0; i < this.capacity; i++){
+			if(this.table[i] != null){
+				System.out.print(this.table[i].value+"	");
+			}
+			else{
+				System.out.print(this.table[i]+"	");
+			}
+		}
+		System.out.println();
 	}
 	
 	private static class Node<Key, Value>{
