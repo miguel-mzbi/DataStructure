@@ -1,5 +1,7 @@
 package h3;
 
+import java.util.Iterator;
+
 public class HashTableOpenAddressingMain {
 
 	public static void main(String[] args) {
@@ -58,10 +60,10 @@ public class HashTableOpenAddressingMain {
 		hash.output();
 
 		
-//		Iterator<Integer> kit = hash.getKeyIterator();
-//		while(kit.hasNext()){
-//			System.out.println(kit.next());
-//		}
+		Iterator<Integer> kit = hash.getKeyIterator();
+		while(kit.hasNext()){
+			System.out.println(kit.next());
+		}
 		
 		System.out.println(hash.remove(5));
 		System.out.println(hash.remove(14));

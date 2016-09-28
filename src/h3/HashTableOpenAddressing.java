@@ -1,6 +1,7 @@
 package h3;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<Key, Value> {
 
@@ -108,16 +109,12 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 		return this.getValue(k) != null;
 	}
 
-	@Override
 	public Iterator<Key> getKeyIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new keyIterator<Key>();
 	}
 
-	@Override
 	public Iterator<Value> getValueIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new valueIterator<Value>();
 	}
 
 	public boolean isEmpty() {
@@ -145,6 +142,64 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 			}
 		}
 		System.out.println();
+	}
+	
+	@SuppressWarnings("hiding")
+	private class keyIterator<Key> implements Iterator<Key>{
+		int nextIndex;
+		
+		public keyIterator(){
+			this.nextIndex = 0;
+		}
+		
+		public boolean hasNext(){
+			return this.nextIndex < HashTableOpenAddressing.this.capacity;
+		}
+
+		@SuppressWarnings("unchecked")
+		public Key next(){
+			if(!this.hasNext()){
+				throw new NoSuchElementException();
+			}
+			System.out.println("I:"+this.nextIndex);
+			if(HashTableOpenAddressing.this.table[this.nextIndex] == null){
+				this.nextIndex++;
+				return null;
+			}
+			else{
+				return (Key) HashTableOpenAddressing.this.table[nextIndex++].key;
+			}
+		}
+		
+	}
+	
+	@SuppressWarnings("hiding")
+	private class valueIterator<Value> implements Iterator<Value>{
+		int nextIndex;
+		
+		public valueIterator(){
+			this.nextIndex = 0;
+		}
+		
+		public boolean hasNext(){
+			return this.nextIndex < HashTableOpenAddressing.this.capacity;
+		}
+
+		@SuppressWarnings("unchecked")
+		public Value next(){
+			if(!this.hasNext()){
+				throw new NoSuchElementException();
+			}
+			System.out.println("I:"+this.nextIndex);
+			if(HashTableOpenAddressing.this.table[this.nextIndex] == null){
+				this.nextIndex++;
+				return null;
+			}
+			else{
+				return (Value) HashTableOpenAddressing.this.table[nextIndex++].value;
+			}
+		}
+		
 	}
 	
 	private static class Node<Key, Value>{
