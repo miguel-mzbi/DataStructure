@@ -75,7 +75,6 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 				this.table[i] = null;
 				removedSpace = i;
 			}
-//			else if()
 		}
 		for(int i = (1+removedSpace)%this.capacity; i != -1; i = ++i%this.capacity){
 			if(this.table[i] != null && this.hash(this.table[i].key) == i){
@@ -132,17 +131,17 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 		this.size = 0;
 	}
 //	Method not valid, only for testing
-	public void output(){
-		for(int i = 0; i < this.capacity; i++){
-			if(this.table[i] != null){
-				System.out.print(this.table[i].value+"	");
-			}
-			else{
-				System.out.print(this.table[i]+"	");
-			}
-		}
-		System.out.println();
-	}
+//	public void output(){
+//		for(int i = 0; i < this.capacity; i++){
+//			if(this.table[i] != null){
+//				System.out.print(this.table[i].value+"	");
+//			}
+//			else{
+//				System.out.print(this.table[i]+"	");
+//			}
+//		}
+//		System.out.println();
+//	}
 	
 	@SuppressWarnings("hiding")
 	private class keyIterator<Key> implements Iterator<Key>{
