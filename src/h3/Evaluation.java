@@ -2,59 +2,59 @@ package h3;
 
 public class Evaluation {
 	
-	public static int Recursive(Chain<Character> c){
+	public static int Recursive(Chain<Character> prefix){
 		Chain<Character> chainNum = new Chain<Character>();
 		Chain<Character> chainSym = new Chain<Character>();
-		int s = c.size();
-		int l = c.size()/2;
-		for(int i = 0; i < s; i++){
-			if(i <= l-1){
-				chainSym.add(i, c.remove(0));
+		int size = prefix.size();
+		int lenght = prefix.size()/2;
+		for(int i = 0; i < size; i++){
+			if(i <= lenght-1){
+				chainSym.add(i, prefix.remove(0));
 			}
 			else{
-				chainNum.add(i-l, c.remove(0));
+				chainNum.add(i-lenght, prefix.remove(0));
 			}
 		}
 		return Recursive(chainSym, chainNum, 0);
 	}
-	public static int Recursive(Chain<Character> sym, Chain<Character> num, int res){
+	public static int Recursive(Chain<Character> sym, Chain<Character> num, int result){
 		if(sym.size() != num.size()){
-			res += Character.getNumericValue(num.remove(0));
+			result += Character.getNumericValue(num.remove(0));
 		}
 		else if (!num.isEmpty()){
 			if(sym.remove(0) == '+'){
-				res += Character.getNumericValue(num.remove(0));
+				result += Character.getNumericValue(num.remove(0));
 			}
 			else{
-				res -= Character.getNumericValue(num.remove(0));
+				result -= Character.getNumericValue(num.remove(0));
 			}
-			return Recursive(sym, num, res);
+			return Recursive(sym, num, result);
 		}
-		return res;
+		return result;
 	}
 	
-	public static int Iterative(Chain<Character> c){
+	public static int Iterative(Chain<Character> prefix){
 		ChainStack<Character> stackNum = new ChainStack<Character>();
 		ChainStack<Character> stackSym = new ChainStack<Character>();
-		int s = c.size();
-		for(int i = 1; i <= s; i++){
-			if(i <= s/2){
-				stackSym.push(c.remove(0));
+		int size = prefix.size();
+		for(int i = 1; i <= size; i++){
+			if(i <= size/2){
+				stackSym.push(prefix.remove(0));
 			}
 			else{
-				stackNum.push(c.remove(0));
+				stackNum.push(prefix.remove(0));
 			}
 		}
-		int r = 0;
+		int result = 0;
 		while(!stackNum.isEmpty()){
 			if(stackSym.isEmpty() || stackSym.pop() == '+'){
-				r += Character.getNumericValue(stackNum.pop());
+				result += Character.getNumericValue(stackNum.pop());
 			}
 			else{
-				r -= Character.getNumericValue(stackNum.pop());
+				result -= Character.getNumericValue(stackNum.pop());
 			}
 		}
-		return r;
+		return result;
 	}
 	
 	public static void main(String[] args){

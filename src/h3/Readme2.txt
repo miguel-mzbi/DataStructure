@@ -1,3 +1,5 @@
+Evaluation
+
 Recursive method
 
 public static int Recursive(Chain<Character> c){
@@ -13,7 +15,7 @@ public static int Recursive(Chain<Character> c){
 			chainNum.add(i-l, c.remove(0));										1
 		}
 	}
-	return Recursive(chainSym, chainNum, 0);									n (n=size of chainNum)
+	return Recursive(chainSym, chainNum, 0);									1 
 }
 
 public static int Recursive(Chain<Character> sym, Chain<Character> num, int res){
@@ -27,7 +29,7 @@ public static int Recursive(Chain<Character> sym, Chain<Character> num, int res)
 		else{
 			res -= Character.getNumericValue(num.remove(0));					1
 		}
-		return Recursive(sym, num, res);										n-1
+		return Recursive(sym, num, res);										n-1 (n=size of chainNum)
 	}
 	return res;																	1
 }

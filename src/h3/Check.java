@@ -2,14 +2,14 @@ package h3;
 
 public class Check {
 	
-	public static boolean Iterative(Chain<Character> c){
+	public static boolean Iterative(Chain<Character> binaryChain){
 		ChainStack<Character> ones = new ChainStack<Character>();
-		if(c.size()%2 == 1){
+		if(binaryChain.size()%2 == 1){
 			return false;
 		}
-		for(int i = 0; i < c.size(); i++){
-			if(c.get(i) == '1'){
-				ones.push(c.remove(i));
+		for(int i = 0; i < binaryChain.size(); i++){
+			if(binaryChain.get(i) == '1'){
+				ones.push(binaryChain.remove(i));
 				i--;
 			}
 		}
@@ -18,7 +18,7 @@ public class Check {
 			ones.pop();
 			noOnes++;
 		}
-		if(noOnes == c.size()){
+		if(noOnes == binaryChain.size()){
 			return true;
 		}
 		else{
