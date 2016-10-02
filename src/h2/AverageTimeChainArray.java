@@ -1,5 +1,8 @@
 package h2;
 
+import h2.linearList.ChainLinearList;
+import h2.linearList.LinearListArray;
+
 public class AverageTimeChainArray {
 	
 	@SuppressWarnings("unused")

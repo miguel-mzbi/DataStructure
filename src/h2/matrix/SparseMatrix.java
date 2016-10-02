@@ -1,4 +1,4 @@
-package h2;
+package h2.matrix;
 
 import java.util.NoSuchElementException;
 

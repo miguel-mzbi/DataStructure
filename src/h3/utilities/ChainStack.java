@@ -1,4 +1,4 @@
-package h3;
+package h3.utilities;
 
 import java.util.EmptyStackException;
 

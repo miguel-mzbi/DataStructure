@@ -1,4 +1,4 @@
-package h2;
+package h2.matrix;
 
 public class SparseMatrixMain {
 	public static void main(String[] args) {

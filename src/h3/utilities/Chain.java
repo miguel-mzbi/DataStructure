@@ -1,4 +1,4 @@
-package h3;
+package h3.utilities;
 
 public class Chain<Item> implements LinearList<Item>{
 	protected ChainNode<Item> firstNode;

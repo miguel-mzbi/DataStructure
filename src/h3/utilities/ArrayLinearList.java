@@ -1,8 +1,6 @@
-package h2;
+package h3.utilities;
 
-import java.util.Iterator;
-
-public class LinearListArray<Item> implements LinearList<Item>{
+public class ArrayLinearList<Item> implements LinearList<Item>{
 	
 	protected Item element[];
 	protected int size;
@@ -10,13 +8,13 @@ public class LinearListArray<Item> implements LinearList<Item>{
 	private int selectedSize;
 
 	@SuppressWarnings("unchecked")
-	public LinearListArray(){
+	public ArrayLinearList(){
 		this.size = 0;
 		this.selectedSize = defaultSize;
 		this.element = (Item[]) new Object[defaultSize];
 	}
 	@SuppressWarnings("unchecked")
-	public LinearListArray(int newSize){
+	public ArrayLinearList(int newSize){
 		this.size = 0;
 		this.selectedSize = newSize;
 		this.element = (Item[]) new Object[newSize];
@@ -87,7 +85,7 @@ public class LinearListArray<Item> implements LinearList<Item>{
 	 */
 	public void add(int index, Item item) {
 		if(this.size == this.selectedSize){
-			resize();
+			this.resize();
 		}
 		if(index<0 || index>this.size){
 			throw new IndexOutOfBoundsException("Index out of range");
@@ -120,7 +118,7 @@ public class LinearListArray<Item> implements LinearList<Item>{
 	}
 	
 	/**
-	 * Doubles the size when max size is reached
+	 * Doubles the maximum size
 	 */
 	private void resize(){
 		@SuppressWarnings("unchecked")
@@ -128,37 +126,6 @@ public class LinearListArray<Item> implements LinearList<Item>{
 		System.arraycopy(this.element, 0, newArray, 0, this.size);
 		this.element=newArray;
 		this.selectedSize=this.selectedSize*2;
-	}
-	
-	protected class IteratorArray implements Iterator<Item>{
-		private int nextIndex ;
-		private boolean wasNextCalled ;
-		
-		protected IteratorArray() {
-			this.nextIndex = 0;
-			this.wasNextCalled = false;
-		}
-		public boolean hasNext(){
-			return (this.nextIndex < size);
-		}
-
-		public Item next(){
-			this.nextIndex++;
-			this.wasNextCalled = true;
-			return element[this.nextIndex-1];
-		}
-		
-		public void remove(){
-			if(this.wasNextCalled){
-				this.nextIndex--;
-				LinearListArray.this.remove(this.nextIndex);
-			}
-			else{
-				throw new IllegalStateException("Next has to be called");
-			}
-			this.wasNextCalled=false;
-		}
-		
 	}
 
 }
