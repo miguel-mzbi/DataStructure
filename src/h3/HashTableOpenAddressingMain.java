@@ -59,11 +59,12 @@ public class HashTableOpenAddressingMain {
 		System.out.println(hash.remove(7));
 		hash.output();
 
-		
-		Iterator<Integer> kit = hash.getKeyIterator();
-		while(kit.hasNext()){
-			System.out.println(kit.next());
+		System.out.println("\nIterator");
+		Iterator<Integer> iterator = hash.getKeyIterator();
+		while(iterator.hasNext()){
+			System.out.println(iterator.next());
 		}
+		System.out.println("End of Iterator\n");
 		
 		System.out.println(hash.remove(5));
 		System.out.println(hash.remove(14));

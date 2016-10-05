@@ -23,16 +23,16 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 		return (key.hashCode() & 0x7FFFFFFF) % this.capacity;
 	}
 	
-	private int reHash(Key key, int size){
+	private int hash(Key key, int size){
 		return (key.hashCode() & 0x7FFFFFFF) % size;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void resize(){
+	private void rehash(){
 		Node<Key, Value>[] tempTable = new Node[this.capacity*2+1];
 		for(int i = 0; i < this.capacity; i++){
 			if(this.table[i] != null){
-				tempTable[this.reHash(this.table[i].key, this.capacity*2+1)] = this.table[i];
+				tempTable[this.hash(this.table[i].key, this.capacity*2+1)] = this.table[i];
 			}
 			this.table[i] = null;
 		}
@@ -42,7 +42,7 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 	
 	public Value add(Key k, Value v) {
 		if(this.size == this.capacity){
-			this.resize();
+			this.rehash();
 		}
 		int pos = this.hash(k);
 		for(int i = pos, path = 0; path < this.capacity; i = ++i%this.capacity, path++){
@@ -160,7 +160,6 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 			if(!this.hasNext()){
 				throw new NoSuchElementException();
 			}
-			System.out.println("I:"+this.nextIndex);
 			if(HashTableOpenAddressing.this.table[this.nextIndex] == null){
 				this.nextIndex++;
 				return null;
@@ -181,7 +180,7 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 		}
 		
 		public boolean hasNext(){
-			return this.nextIndex < HashTableOpenAddressing.this.capacity;
+			return this.nextIndex < HashTableOpenAddressing.this.size;
 		}
 
 		@SuppressWarnings("unchecked")
@@ -189,7 +188,6 @@ public class HashTableOpenAddressing<Key, Value> implements DictionaryInterface<
 			if(!this.hasNext()){
 				throw new NoSuchElementException();
 			}
-			System.out.println("I:"+this.nextIndex);
 			if(HashTableOpenAddressing.this.table[this.nextIndex] == null){
 				this.nextIndex++;
 				return null;
