@@ -16,21 +16,21 @@ public class ABB<Key extends Comparable<Key>, Value> {
 		return this.root == null;
 	}
 	
-	public int altura(){
-		
-	}
-	
-	public int cuantasHojas(){
-		
-	}
-	
-	public String hojas(){
-		
-	}
-	
-	public boolean contains(Key key){
-		
-	}
+//	public int altura(){
+//		
+//	}
+//	
+//	public int cuantasHojas(){
+//		
+//	}
+//	
+//	public String hojas(){
+//		
+//	}
+//	
+//	public boolean contains(Key key){
+//		
+//	}
 	
 	/**
 	 * get - Iterative method to get the value of desired key
@@ -61,33 +61,30 @@ public class ABB<Key extends Comparable<Key>, Value> {
 	 */
 	public void put(Key key, Value val){
 		ABBNode temp = this.root;
-		ABBNode prevNode = null;
-		int cmp = 0;
 		if(temp == null){
 			this.root = new ABBNode(key, val);
 		}
 		else{
 			while(temp != null){
-				cmp = key.compareTo(temp.key);
-				prevNode = temp;
-				if(cmp == 0){
-					break;
-				}
-				else if(cmp > 0){
+				int cmp = key.compareTo(temp.key); //Value of comparable
+				if(cmp > 0 && temp.right != null){ //If cmp is bigger go to next right node (If not null)
 					temp = temp.right;
 				}
-				else if(cmp < 0){
+				else if(cmp < 0 && temp.left != null){//If cmp is smaller go to next left node (If not null)
 					temp = temp.left;
 				}
-			}
-			if(cmp == 0){
-				prevNode.value = val;
-			}
-			else if(cmp > 0){
-				prevNode.right = new ABBNode(key, val);
-			}
-			else if(cmp < 0){
-				prevNode.left = new ABBNode(key, val);
+				if(cmp == 0){ //If already on current node
+					temp.value = val;
+					break;
+				}
+				else if(cmp > 0 && temp.right == null){ //If the new node goes on the right (Right is null)
+					temp.right = new ABBNode(key, val);
+					break;
+				}
+				else if(cmp < 0 && temp.left == null){ //If the new node goes on the left (Left is null)
+					temp.left = new ABBNode(key, val);
+					break;
+				}
 			}
 		}
 	}
@@ -151,29 +148,29 @@ public class ABB<Key extends Comparable<Key>, Value> {
 		return output;
 	}
 	
-	public String preOrder(){
-		
-	}
-	
-	public String postorder(){
-		
-	}
-	
-	public String descendente(){
-		
-	}
-	
-	public String porNivel(){ //Iter
-		
-	}
-	
-	public String cualesPorNivel(int n){ //Iter
-		
-	}
-	
-	public String mayoresA(Key key){ //Iter
-		
-	}
+//	public String preOrder(){
+//		
+//	}
+//	
+//	public String postorder(){
+//		
+//	}
+//	
+//	public String descendente(){
+//		
+//	}
+//	
+//	public String porNivel(){ //Iter
+//		
+//	}
+//	
+//	public String cualesPorNivel(int n){ //Iter
+//		
+//	}
+//	
+//	public String mayoresA(Key key){ //Iter
+//		
+//	}
 	
 	private class ABBNode{
 		Key key;
