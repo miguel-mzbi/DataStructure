@@ -27,35 +27,33 @@ public class E1LinkedBinaryTree {
 	//Complexity of O(n)
 	
 	//Not necessary to answer. Necessary for testing
-	public void put(int val, int key){
+	public void put(int key, Object val){
 		BinaryTreeNode temp = this.root;
 		if(temp.element == null){
-			this.root.element = val;
-			this.root.key = key;
+			this.root = new BinaryTreeNode(key, val);
 		}
 		else{
-			while(temp != null){
-				if(key > temp.key && temp.rightChild != null){ //If cmp is bigger go to next right node (If not null)
-					temp = temp.rightChild;
-				}
-				else if(key < temp.key && temp.leftChild != null){//If cmp is smaller go to next left node (If not null)
-					temp = temp.leftChild;
-				}
-				if(key == temp.key){ //If already on current node
-					temp.element = val;
-					break;
-				}
-				else if(key > temp.key && temp.rightChild == null){ //If the new node goes on the right (Right is null)
-					temp.rightChild = new BinaryTreeNode(key, val);
-					break;
-				}
-				else if(key < temp.key && temp.leftChild == null){ //If the new node goes on the left (Left is null)
-					temp.leftChild = new BinaryTreeNode(key, val);
-					break;
-				}
-			}
+			this.put(key, val, temp);
 		}
 	}
+	private void put(int key, Object val, BinaryTreeNode temp){
+		if(key > temp.key && temp.rightChild != null){ //If cmp is bigger go to next right node (If not null)
+			put(key, val, temp.rightChild);
+		}
+		else if(key < temp.key && temp.leftChild != null){//If cmp is smaller go to next left node (If not null)
+			put(key, val, temp.leftChild);
+		}
+		if(key == temp.key){ //If already on current node
+			temp.element = val;
+		}
+		else if(key > temp.key && temp.rightChild == null){ //If the new node goes on the right (Right is null)
+			temp.rightChild = new BinaryTreeNode(key, val);
+		}
+		else if(key < temp.key && temp.leftChild == null){ //If the new node goes on the left (Left is null)
+			temp.leftChild = new BinaryTreeNode(key, val);
+		}
+	}
+	
 	//Not necessary to answer. Necessary for testing
 	public String inOrder(){
 		if(this.root != null){
@@ -96,22 +94,22 @@ public class E1LinkedBinaryTree {
 	}
 	
 	public static void main(String[] args) {
-		E1LinkedBinaryTree ABB = new E1LinkedBinaryTree();
-		ABB.put(37, 5);
-		ABB.put(20, 3);
-		ABB.put(59, 8);
-		ABB.put(4, 2);
-		ABB.put(21, 4);
-		ABB.put(53, 6);
-		ABB.put(85, 10);
-		ABB.put(1, 1);
-		ABB.put(57, 7);
-		ABB.put(61, 9);
-		ABB.put(94, 11);
+		E1LinkedBinaryTree E1 = new E1LinkedBinaryTree();
+		E1.put(37, 5);
+		E1.put(20, 3);
+		E1.put(59, 8);
+		E1.put(4, 2);
+		E1.put(21, 4);
+		E1.put(53, 6);
+		E1.put(85, 10);
+		E1.put(1, 1);
+		E1.put(57, 7);
+		E1.put(61, 9);
+		E1.put(94, 11);
 		
-		System.out.println(ABB.inOrder());
-		ABB.swapChildren();
-		System.out.println(ABB.inOrder());
+		System.out.println(E1.inOrder());
+		E1.swapChildren();
+		System.out.println(E1.inOrder());
 
 	}
 	
