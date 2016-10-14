@@ -2,7 +2,7 @@ package abb;
 
 public class ABB<Key extends Comparable<Key>, Value> {
 	
-	private ABBNode root;
+	ABBNode root;
 	
 	public ABB(){
 		this.root = null;
