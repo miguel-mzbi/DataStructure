@@ -13,26 +13,25 @@ public class E3LinkedBinaryTree {
 		if(this.root.key == 0){
 			return 0;
 		}
-		return maxHeightDifference(root, 0);
+		int[] start = {0,0};
+		int[] dif = maxHeightDifference(root, 0, start);
+		return dif[0]-dif[1];
 	}
 		
-	private int maxHeightDifference(BinaryTreeNode temp, int i){
-		i++;
-		if()
-		max = maxHeightDifference(temp.leftChild, i);
-		
-		
-		if(i == theLevel && temp != null){
-			return temp;
+	private int[] maxHeightDifference(BinaryTreeNode temp, int i, int[] dif){
+		if(temp != null){
+			i++;
+			if(i > dif[0]){
+				dif[0] = i;
+			}
+			if(temp.leftChild == null && temp.rightChild == null && (i < dif[1] || dif[1] == 0)){
+				dif[1] = i;
+			}
+			dif = maxHeightDifference(temp.leftChild, i, dif);
+			dif = maxHeightDifference(temp.rightChild, i, dif);
+			return dif;
 		}
-		else if(temp != null){
-			
-			BinaryTreeNode tempt = elementAtLevel(temp.leftChild, i, theLevel);
-			if(tempt != null) return tempt;
-			tempt = elementAtLevel(temp.rightChild, i, theLevel);
-			if(tempt != null) return tempt;
-		}
-		return null;
+		return dif;
 	}
 	//Complexity of O(2n) (n equals number of nodes)
 	
@@ -116,8 +115,11 @@ public class E3LinkedBinaryTree {
 		E2.put(57, 7);
 		E2.put(61, 9);
 		E2.put(94, 11);
+		E2.put(22, 11);
+		E2.put(-1, 11);
+		E2.put(-100, 11);
 		
-		System.out.println(E2.elementAtLevel(7));
+		System.out.println(E2.maxHeightDifference());
 
 	}
 	
