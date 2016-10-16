@@ -8,7 +8,7 @@ public class E2LinkedBinaryTree {
 		this.root = new BinaryTreeNode(0, null) ;
 	}
 	
-	//Answer to question 1A. Design a method to get a . Recursive.
+	//Answer to question 1A. Design a method to get a node in a level. Recursive.
 	public BinaryTreeNode elementAtLevel(int theLevel){
 		return elementAtLevel(root, theLevel, 0);
 	}
