@@ -16,23 +16,22 @@ public class ABBMain {
 		ABB.put(61, 9);
 		ABB.put(94, 11);
 
-		System.out.println(ABB.inOrder());
-		
-		ABB<Integer, Integer> ABB2 = new ABB<Integer, Integer>();
-		ABB2.add(37, 5);
-		ABB2.add(20, 3);
-		ABB2.add(59, 8);
-		ABB2.add(4, 2);
-		ABB2.add(21, 4);
-		ABB2.add(53, 6);
-		ABB2.add(85, 10);
-		ABB2.add(1, 1);
-		ABB2.add(57, 7);
-		ABB2.add(61, 9);
-		ABB2.add(94, 11);
+		System.out.println("InOrder: " + ABB.inOrder());
+		System.out.println("PreOrder:" + ABB.preOrder());
+		System.out.println("PreOrder It:" + ABB.preOrderIt());
+		System.out.println("PostOrder:" + ABB.postOrder());
+		System.out.println("PorNiveles:" + ABB.porNiveles());
+		System.out.println("CualesPorNivel 1:" + ABB.cualesPorNivel(1));
+		System.out.println("CualesPorNivel 2:" + ABB.cualesPorNivel(2));
+		System.out.println("CualesPorNivel 3:" + ABB.cualesPorNivel(3));
+		System.out.println("CualesPorNivel 4:" + ABB.cualesPorNivel(4));
+		System.out.println("CualesPorNivel 5:" + ABB.cualesPorNivel(5));
+		System.out.println("Descendente:" + ABB.descendente());
+		System.out.println("MayoresA 30:" + ABB.mayoresA(30));
+		System.out.println("CuantasHojas:" + ABB.cuantasHojas());
+		System.out.println("Hojas:" + ABB.hojas());
+		System.out.println("Size:" + ABB.size());
 
-		System.out.println(ABB2.inOrder());
-		
 	}
 
 }
