@@ -16,9 +16,19 @@ public class ABB<Key extends Comparable<Key>, Value> {
 		return this.root == null;
 	}
 	
-//	public int altura(){
-//		
-//	}
+	public int altura(){
+		return altura(this.root, 0);
+	}
+		
+	private int altura(ABBNode temp, int i){
+		if(temp != null){
+			i++;
+			int alturaL = altura(temp.left, i);
+			int alturaR = altura(temp.right, i);
+			return Math.max(alturaL, alturaR);
+		}
+		return i;
+	}
 //	
 //	public int cuantasHojas(){
 //		
@@ -61,30 +71,31 @@ public class ABB<Key extends Comparable<Key>, Value> {
 	 */
 	public void put(Key key, Value val){
 		ABBNode temp = this.root;
+		ABBNode parent = null;
 		if(temp == null){
-			this.root = new ABBNode(key, val);
+			this.root = new ABBNode(key,val);
 		}
 		else{
+			int result = 0;
 			while(temp != null){
-				int cmp = key.compareTo(temp.key); //Value of comparable
-				if(cmp > 0 && temp.right != null){ //If cmp is bigger go to next right node (If not null)
-					temp = temp.right;
-				}
-				else if(cmp < 0 && temp.left != null){//If cmp is smaller go to next left node (If not null)
+				parent = temp;
+				result = key.compareTo(temp.key);
+				if(result == 0)
+					break;
+				else if(result < 0)	
 					temp = temp.left;
-				}
-				if(cmp == 0){ //If already on current node
-					temp.value = val;
-					break;
-				}
-				else if(cmp > 0 && temp.right == null){ //If the new node goes on the right (Right is null)
-					temp.right = new ABBNode(key, val);
-					break;
-				}
-				else if(cmp < 0 && temp.left == null){ //If the new node goes on the left (Left is null)
-					temp.left = new ABBNode(key, val);
-					break;
-				}
+				else if(result > 0) 
+					temp = temp.right;
+			}
+			
+			if(result == 0){
+				temp.value = val;
+			}
+			else if(result > 0){
+				parent.right = new ABBNode(key,val);
+			}
+			else if(result < 0){
+				parent.left = new ABBNode(key,val);
 			}
 		}
 	}
@@ -137,14 +148,12 @@ public class ABB<Key extends Comparable<Key>, Value> {
 	}
 	
 	private String inOrder(ABBNode temp){
-		String output = "";
-		if(temp.left != null){
-			output += inOrder(temp.left) + " ";
+		if(temp == null){
+			return "";
 		}
-		output += temp;
-		if(temp.right != null){
-			output += " " + inOrder(temp.right);
-		}
+		String output = this.inOrder(temp.left);
+		output += "[" + temp.key.toString() +","+ temp.value.toString()+"]";
+		output += this.inOrder(temp.right);
 		return output;
 	}
 	
