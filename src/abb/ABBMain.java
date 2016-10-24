@@ -31,6 +31,39 @@ public class ABBMain {
 		System.out.println("CuantasHojas:" + ABB.cuantasHojas());
 		System.out.println("Hojas:" + ABB.hojas());
 		System.out.println("Size:" + ABB.size());
+		
+		System.out.println("");
+		System.out.println("Removed 10 (null): " + ABB.remove(10));
+		System.out.println("InOrder: " + ABB.inOrder());
+		System.out.println("Size:" + ABB.size());
+		
+		System.out.println("");
+		System.out.println("Removed 1: " + ABB.remove(1));
+		System.out.println("InOrder: " + ABB.inOrder());
+		System.out.println("Size:" + ABB.size());
+		
+		System.out.println("");
+		System.out.println("Removed 53: " + ABB.remove(53));
+		System.out.println("InOrder: " + ABB.inOrder());
+		System.out.println("Size:" + ABB.size());
+		
+		System.out.println("");
+		System.out.println("Removed 37: " + ABB.remove(37));
+		System.out.println("InOrder: " + ABB.inOrder());
+		System.out.println("Size:" + ABB.size());
+		
+		System.out.println("");
+		System.out.println("Removed 59: " + ABB.remove(59));
+		System.out.println("InOrder: " + ABB.inOrder());
+		System.out.println("Size:" + ABB.size());
+		
+		System.out.println("");
+		System.out.println("CualesPorNivel 1:" + ABB.cualesPorNivel(1));
+		System.out.println("CualesPorNivel 2:" + ABB.cualesPorNivel(2));
+		System.out.println("CualesPorNivel 3:" + ABB.cualesPorNivel(3));
+		System.out.println("CualesPorNivel 4:" + ABB.cualesPorNivel(4));
+		System.out.println("CualesPorNivel 5:" + ABB.cualesPorNivel(5));
+
 
 	}
 

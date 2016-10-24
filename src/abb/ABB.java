@@ -363,6 +363,101 @@ public class ABB<Key extends Comparable<Key>, Value> {
 		n++;
 		return this.size(temp.right, n);
 	}	
+	
+	public Value remove(Key key){
+		if(this.root == null || this.contains(key) == false){
+			return null;
+		}
+		ABBNode toRemove = this.removing(key);
+		return toRemove.value;
+	}
+	
+	private ABBNode removing(Key key){
+		ABBNode temp = this.root;
+		ABBNode parent = null;
+		ABBNode toRemove = null;
+		int dir = -1; //0-left, 1-right
+		while(temp != null){
+			int cmp = key.compareTo(temp.key);
+			if(cmp == 0){
+				toRemove = temp;
+				break;
+			}
+			else if(cmp > 0){
+				parent = temp;
+				temp = temp.right;
+				dir = 1;
+			}
+			else if(cmp < 0){
+				parent = temp;
+				temp = temp.left;
+				dir = 0;
+			}
+		}
+		if(temp.left == null && temp.right == null){
+			if(dir == -1){
+				this.root = null;
+			}
+			else if(dir == 0){
+				parent.left = null;
+			}
+			else{
+				parent.right = null;
+			}
+		}
+		else if(temp.left == null){
+			if(dir == -1){
+				this.root = temp.right;
+			}
+			else if(dir == 0){
+				parent.left = temp.right;
+			}
+			else{
+				parent.right = temp.right;
+			}
+		}
+		else if(temp.right == null){
+			if(dir == -1){
+				this.root = temp.left;
+			}
+			else if(dir == 0){
+				parent.left = temp.left;
+			}
+			else{
+				parent.right = temp.left;
+			}
+		}
+		else if(temp.left != null && temp.right != null){
+			ABBNode replacement = this.removing(this.getBiggerLeft(temp.left).key);
+			if(dir == -1){
+				replacement.left = temp.left;
+				replacement.right = temp.right;
+				this.root = replacement;
+			}
+			else if(dir == 0){
+				replacement.left = temp.left;
+				replacement.right = temp.right;
+				parent.left = replacement;
+			}
+			else{
+				replacement.left = temp.left;
+				replacement.right = temp.right;
+				parent.right = replacement;
+			}
+		}
+		return toRemove;
+	}
+	
+	private ABBNode getBiggerLeft(ABBNode temp){
+		if(temp == null){
+			return null;
+		}
+		ABBNode toReturn = getBiggerLeft(temp.right);
+		if(toReturn != null){
+			return toReturn;
+		}
+		return temp;
+	}
 
 	/**
 	 * ABBNode class
