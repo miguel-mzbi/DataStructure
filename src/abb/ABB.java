@@ -364,6 +364,13 @@ public class ABB<Key extends Comparable<Key>, Value> {
 		return this.size(temp.right, n);
 	}	
 	
+	/**
+	 * remove - Recursive/Iterative method that removes the node with the selected key
+	 * If node to remove has 2 children, the biggest node found on the left (Considering the node to remove is the parent)
+	 * is selected as replacement. This counts as another remove.
+	 * @param key - Key of node to remove
+	 * @return Value of the removed node. Null if no node is found
+	 */
 	public Value remove(Key key){
 		if(this.root == null || this.contains(key) == false){
 			return null;
