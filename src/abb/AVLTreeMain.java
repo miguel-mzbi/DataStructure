@@ -21,8 +21,7 @@ public class AVLTreeMain {
 		AVL.insert(36);
 		AVL.insert(1);
 		AVL.insert(40);
-		System.out.println("40");
-		System.out.println(AVL.inOrder());
+		System.out.println("InOrder: " + AVL.inOrder());
 	}
 
 }

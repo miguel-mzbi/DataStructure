@@ -158,7 +158,7 @@ public class AVLTree<E extends Comparable<E>> {
 		}
 		
 		public String toString(){
-			return "[E:"+this.element+"-H:"+this.height+"]";
+			return "["+this.element+"-"+this.height+"]";
 		}
 	}
 }
