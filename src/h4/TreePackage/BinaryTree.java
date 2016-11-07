@@ -20,9 +20,21 @@ public class BinaryTree implements BTree {
 	}
 
 	public int Count() {
-		// TODO Auto-generated method stub
-		return 0;
+		// Assuming method to count leaves
+		return Count(this.root, 0);
 	}
+	
+	private int Count(BTNode temp, int n){
+		if(temp == null){
+			return n;
+		}
+		n = Count(temp.gLeft(), n);
+		if(temp.gLeft() == null && temp.gRight() == null){
+			n++;
+		}
+		return Count(temp.gRight(), n);
+	}
+	
 	public int Size(BTNode ATree) {
 		return this.Size(ATree, 0);
 	}

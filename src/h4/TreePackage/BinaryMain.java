@@ -11,6 +11,7 @@ public class BinaryMain {
 		d.sLeft(c);
 		BinaryTree BT = new BinaryTree(d);
 		System.out.println(BT.Size());
+		System.out.println(BT.Count());
 
 	}
 }
