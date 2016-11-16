@@ -11,18 +11,20 @@ public class ExpenseMain {
 		table.insertExpense(beer2);
 		table.insertExpense(beer);
 		table.output();
-		System.out.println();
-		System.out.println(table.getExpense("Beer", 11));
-		System.out.println();
-		System.out.println(table.remove("Beer", 10));
-		System.out.println();
-		table.output();
-		System.out.println();
-		System.out.println(table.remove("Beer", 10));
-		System.out.println();
-		table.output();
-		System.out.println(table.remove("Beer", 11));
-		System.out.println();
-		table.output();
+//		System.out.println();
+//		System.out.println(table.getExpense("Beer", 11));
+//		System.out.println();
+//		System.out.println(table.remove("Beer", 10));
+//		System.out.println();
+//		table.output();
+//		System.out.println();
+//		System.out.println(table.remove("Beer", 10));
+//		System.out.println();
+//		table.output();
+//		System.out.println(table.remove("Beer", 11));
+//		System.out.println();
+//		table.output();
+		
+		System.out.println(table.table[table.hash("Beer")].inOrderForSelects());
 	}
 }

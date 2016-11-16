@@ -10,7 +10,7 @@ public class ExpenseTable {
 	//Instead of replacing it, it adds to a counter of repetitions.
 	int m;
 	private int size;
-	AVLTreeMod<Integer,Expense>[] table;
+	AVLTreeMod<Integer>[] table;
 	
 	public ExpenseTable(){
 		this(101);
@@ -33,7 +33,7 @@ public class ExpenseTable {
 	
 	@SuppressWarnings("unchecked")
 	private void resize(){
-		AVLTreeMod<Integer,Expense>[] newTable = new AVLTreeMod[this.m*2+1];
+		AVLTreeMod<Integer>[] newTable = new AVLTreeMod[this.m*2+1];
 		for(int i = 0; i < this.m; i++){
 			if(this.table[i] != null){
 				newTable[hash(this.table[i].root.value.item, this.m*2+1)] = this.table[i];
@@ -50,7 +50,7 @@ public class ExpenseTable {
 		int h = this.hash(k);
 		for(int i = h, count = 0; count < this.m; i = ++i%this.m, count++){
 			if(this.table[i] == null){
-				this.table[i] = new AVLTreeMod<Integer,Expense>();
+				this.table[i] = new AVLTreeMod<Integer>();
 				this.table[i].insert(item.expense, item);
 				this.size++;
 				break;
@@ -70,7 +70,7 @@ public class ExpenseTable {
 		Expense saved = null;
 		for(int i = h; this.table[i] != null; i = ++i%this.m){
 			if(this.table[i].root.value.item.equals(k)){
-				AVLTreeMod<Integer,Expense> temp = this.table[i];
+				AVLTreeMod<Integer> temp = this.table[i];
 				saved = temp.remove(no);
 				this.table[i] = temp;
 				freeSpace = i;
@@ -100,7 +100,7 @@ public class ExpenseTable {
 
 	public Expense getValue(String k) {
 		int h = this.hash(k);
-		for(AVLTreeMod<Integer,Expense> n = table[h]; n != null; n = table[++h%this.m]){
+		for(AVLTreeMod<Integer> n = table[h]; n != null; n = table[++h%this.m]){
 			if(n.root.element.equals(k)){
 				return n.root.value;
 			}
@@ -140,7 +140,7 @@ public class ExpenseTable {
 	
 	public Expense getExpense(String k,Integer i) {
 		int h = this.hash(k);
-		for(AVLTreeMod<Integer,Expense> n = this.table[h]; n != null; n = this.table[++h%this.m]){
+		for(AVLTreeMod<Integer> n = this.table[h]; n != null; n = this.table[++h%this.m]){
 			
 			if(n.root.value.item.equals(k)){
 				return n.getValue(i);

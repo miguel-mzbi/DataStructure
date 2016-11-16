@@ -1,24 +1,24 @@
 package proyecto;
 
-public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
+public class AVLTree<E extends Comparable<E>> {
 	//AVL Tree that belongs to the Invoice Table.
 	//It stores all the invoices that belong to a single person.
 	//No invoice can be repeated. If an invoice is inserted, with an already existing invoice number, the old one is replaced.
 	//Because all the nodes of the tree belong to one person, it is useful to consider the invoice number as the key.
 	class Node{
-		invoiceNo invoiceKey;
-		invoice invoiceVal;
+		E element;
+		Invoice value;
 		Node left,right;
 		int height;
 		
-		private Node(invoiceNo element, Node left, Node right,invoice value){
-			this.invoiceKey = element;
+		private Node(E element, Node left, Node right,Invoice value){
+			this.element = element;
 			this.left = this.right = null; 
 			this.height = 1;
-			this.invoiceVal = value;
+			this.value = value;
 		}
 		public String toString(){
-			return "["+this.invoiceKey.toString()+"-"+this.height+"]";
+			return "["+this.element+"-"+this.height+"]";
 		}
 	}	
 	
@@ -35,13 +35,13 @@ public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
 		return node.height;
 	}
 	
-	public invoice getValue(invoiceNo key){
+	public Invoice getValue(E key){
 		Node node = this.root;
 		int result;
 		while(node != null){
-			result = key.compareTo(node.invoiceKey);
+			result = key.compareTo(node.element);
 			if(result == 0)
-				return node.invoiceVal;
+				return node.value;
 			else if(result < 0)
 				node = node.left;
 			else if(result > 0)
@@ -119,13 +119,13 @@ public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
 		return rightRotate(t);
 	}
 
-	public void insert(invoiceNo element,invoice value){
+	public void insert(E element,Invoice value){
 		this.root = insert(element,this.root, value);
 	}
-	private Node insert(invoiceNo element,Node node,invoice value){
+	private Node insert(E element,Node node,Invoice value){
 		if(node == null)
 			return new Node(element,null,null,value);
-		int compareResult = element.compareTo(node.invoiceKey);
+		int compareResult = element.compareTo(node.element);
 		if(compareResult < 0)
 			node.left = insert(element,node.left,value);
 		else if (compareResult > 0)
@@ -162,11 +162,11 @@ public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
 		return output;
 	}
 	
-	public invoice remove(invoiceNo key){
+	public Invoice remove(E key){
 		Node node = this.root;
-		invoice temp;
+		Invoice temp;
 		while(node != null){
-			int cmp = key.compareTo(node.invoiceKey);
+			int cmp = key.compareTo(node.element);
 			if(cmp == 0)
 				break;
 			else if(cmp > 0)
@@ -177,7 +177,7 @@ public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
 		if(node == null)
 			return null;
 		else{
-			temp = node.invoiceVal;
+			temp = node.value;
 			treeDelete(node);
 			balance(node);
 		}
@@ -222,7 +222,7 @@ public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
 		Node temp = this.root;
 		Node parent = temp;
 		while(temp != null){
-			int cmp = node.invoiceKey.compareTo(temp.invoiceKey);
+			int cmp = node.element.compareTo(temp.element);
 			if(cmp == 0)
 				break;
 			else if(cmp > 0){
@@ -245,5 +245,81 @@ public class AVLTree<invoiceNo extends Comparable<invoiceNo>, invoice > {
 			node = node.right;
 		return node;
 	}
-
+	//Method for query 3. Print all the expenses a person has made
+	public String inOrderForExpenses(){
+		if(root != null){
+			return this.inOrderForExpenses(root);
+		}
+		return "";
+	}
+	private String inOrderForExpenses(Node node){
+		if(node == null)
+			return "";
+		String output = this.inOrderForExpenses(node.left);
+		AVLTreeMod<Integer> exp;
+		int i = 0, j  = 0;
+		for(exp = node.value.expenses.table[i] ; j < node.value.expenses.getSize() ; exp = node.value.expenses.table[++i]){
+			if(exp != null){
+				output += exp.inOrderForSelects();
+				j++;
+			}
+		}
+		output += this.inOrderForExpenses(node.right);
+		return output;
+	}
+	//Method for query 4. Print all the payments a person has made
+	public String inOrderForPayments(){
+		if(root != null){
+			return this.inOrderForPayments(root);
+		}
+		return "";
+	}
+	private String inOrderForPayments(Node node){
+		if(node == null)
+			return "";
+		String output = this.inOrderForPayments(node.left);
+		output += "\n"+ node.value.toStringWOName();
+		output += this.inOrderForPayments(node.right);
+		return output;
+	}
+	//Method for query 5. Print the earnings after expense for a person
+	public String getEarnings(){
+		if(root != null){
+			int totalExpenses, totalPayments;
+			totalExpenses = this.getTotalExpenses(root);
+			totalPayments = this.getTotalPayments(root);
+			return ("Total Expenses: "+ totalExpenses+ "\nTotal Payments: "+ totalPayments+ "\nTotal Earnings: "+ (totalPayments-totalExpenses));
+		}
+		return "";
+	}
+	private int getTotalPayments(Node node){
+		if(node == null)
+			return 0;
+		int totalPayments = this.getTotalPayments(node.left);
+		totalPayments += node.value.payment;
+		totalPayments += this.getTotalPayments(node.right);
+		return totalPayments;
+	}
+	private int getTotalExpenses(Node node){
+		if(node == null)
+			return 0;
+		int totalExpenses = this.getTotalExpenses(node.left);
+		AVLTreeMod<Integer> exp;
+		int i = 0, j  = 0;
+		for(exp = node.value.expenses.table[i] ; j < node.value.expenses.getSize() ; exp = node.value.expenses.table[++i]){
+			if(exp != null){
+				totalExpenses += exp.getExpensesSum();
+				j++;
+			}
+		}
+		totalExpenses += this.getTotalExpenses(node.right);
+		return totalExpenses;
+	}
+	//Method for query 6. Used to obtain total expenses.
+	public int getTotalExpenses(){
+		if(root != null){
+			return this.getTotalExpenses(root);
+		}
+		return 0;
+	}
 }

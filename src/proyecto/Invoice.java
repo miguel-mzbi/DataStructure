@@ -24,6 +24,9 @@ public class Invoice {
 	public String toString(){
 		return this.name+" "+this.invoiceNo+" "+this.payment;
 	}
+	public String toStringWOName(){
+		return this.invoiceNo+" "+this.payment;
+	}
 	
 	public void insertExpense(Expense expense){
 		expenses.add(expense.item, expense);

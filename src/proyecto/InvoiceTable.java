@@ -7,7 +7,7 @@ public class InvoiceTable {
 	//Each person has an AVL tree that stores all the invoice numbers and the payment where he is involved.
 	int m;
 	private int size;
-	AVLTree<Integer,Invoice>[] table;
+	AVLTree<Integer>[] table;
 	
 	public InvoiceTable(){
 		this(101);
@@ -30,10 +30,10 @@ public class InvoiceTable {
 	
 	@SuppressWarnings("unchecked")
 	private void resize(){
-		AVLTree<Integer,Invoice>[] newTable = new AVLTree[this.m*2+1];
+		AVLTree<Integer>[] newTable = new AVLTree[this.m*2+1];
 		for(int i = 0; i < this.m; i++){
 			if(this.table[i] != null){
-				newTable[hash(this.table[i].root.invoiceVal.name, this.m*2+1)] = this.table[i];
+				newTable[hash(this.table[i].root.value.name, this.m*2+1)] = this.table[i];
 			}
 		}
 		this.m = this.m*2+1;
@@ -47,12 +47,12 @@ public class InvoiceTable {
 		int h = this.hash(k);
 		for(int i = h, count = 0; count < this.m; i = ++i%this.m, count++){
 			if(this.table[i] == null){
-				this.table[i] = new AVLTree<Integer,Invoice>();
+				this.table[i] = new AVLTree<Integer>();
 				this.table[i].insert(item.invoiceNo, item);
 				this.size++;
 				break;
 			}
-			else if(this.table[i].root.invoiceVal.name.equals(k)){
+			else if(this.table[i].root.value.name.equals(k)){
 				this.table[i].insert(item.invoiceNo, item);
 				break;
 			}
@@ -66,14 +66,14 @@ public class InvoiceTable {
 		int freeSpace = -1;
 		Invoice saved = null;
 		for(int i = h; this.table[i] != null; i = ++i%this.m){
-			if(this.table[i].root.invoiceVal.name.equals(k)){
-				AVLTree<Integer,Invoice> temp = this.table[i];
+			if(this.table[i].root.value.name.equals(k)){
+				AVLTree<Integer> temp = this.table[i];
 				saved = temp.remove(no);
 				this.table[i] = temp;
 				freeSpace = i;
 				this.size--;
 			}
-			else if(freeSpace != -1 && this.hash(this.table[i].root.invoiceVal.name) == h){
+			else if(freeSpace != -1 && this.hash(this.table[i].root.value.name) == h){
 					this.table[freeSpace] = this.table[i];
 					this.table[i] = null;
 					freeSpace = i;
@@ -86,7 +86,7 @@ public class InvoiceTable {
 			else if(i == freeSpace && this.table[i] == null){
 				continue;
 			}
-			else if(this.table[i].root!=null && this.hash(this.table[i].root.invoiceVal.name) < freeSpace){
+			else if(this.table[i].root!=null && this.hash(this.table[i].root.value.name) < freeSpace){
 				this.table[freeSpace] = this.table[i];
 				this.table[i] = null;
 				freeSpace = i;
@@ -97,9 +97,9 @@ public class InvoiceTable {
 
 	public Invoice getValue(String k) {
 		int h = this.hash(k);
-		for(AVLTree<Integer,Invoice> n = table[h]; n != null; n = table[++h%this.m]){
-			if(n.root.invoiceKey.equals(k)){
-				return n.root.invoiceVal;
+		for(AVLTree<Integer> n = table[h]; n != null; n = table[++h%this.m]){
+			if(n.root.element.equals(k)){
+				return n.root.value;
 			}
 		}
 		return null;
@@ -126,7 +126,7 @@ public class InvoiceTable {
 	public void output(){
 		for(int i = 0; i < this.m; i++){
 			if(this.table[i]!=null){
-				System.out.print(this.table[i].root.invoiceVal.toString()+"   ");
+				System.out.print(this.table[i].root.value.toString()+"   ");
 			}
 			else{
 				System.out.print(this.table[i]+"   ");
@@ -137,9 +137,9 @@ public class InvoiceTable {
 	
 	public Invoice getInvoice(String k,Integer i) {
 		int h = this.hash(k);
-		for(AVLTree<Integer,Invoice> n = this.table[h]; n != null; n = this.table[++h%this.m]){
+		for(AVLTree<Integer> n = this.table[h]; n != null; n = this.table[++h%this.m]){
 			
-			if(n.root.invoiceVal.name.equals(k)){
+			if(n.root.value.name.equals(k)){
 				return n.getValue(i);
 			}
 		}
@@ -149,4 +149,5 @@ public class InvoiceTable {
 	public void insertInvoice(Invoice invoice){
 		this.add(invoice.name, invoice);
 	}
+	
 }
