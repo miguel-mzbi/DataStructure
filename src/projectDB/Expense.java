@@ -1,4 +1,4 @@
-package proyecto;
+package projectDB;
 
 public class Expense {
 	//Node for the entries on the expense's AVL tree.

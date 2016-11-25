@@ -1,4 +1,4 @@
-package proyecto;
+package projectDB;
 
 public class Invoice {
 	//Node that stores the information needed for an entry in the invoice table.

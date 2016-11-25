@@ -1,7 +1,6 @@
-package proyecto;
+package projectDB;
 
 public class AddressTable {
-
 	//Data structure for table 1 Name - Address
 	//Each entry has a key (The name of the person) and a value (The address of the person)
 	private int m;
@@ -142,5 +141,4 @@ public class AddressTable {
 		}
 		System.out.println();
 	}
-	
 }

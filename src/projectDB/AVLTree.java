@@ -1,34 +1,31 @@
-package proyecto;
+package projectDB;
 
-public class AVLTreeMod<E extends Comparable<E>> {
-	//AVL Tree that belongs to the Expenses Table.
-	//It stores all the expenses where the item name is the same. 
-	//Remember that the AVL Tree is stores in a hash map for the expenses of only one invoice.
-	//Because an exact expense can be repeated, instead of inserting a new node in the tree, a counter for the node is increased or decreased (Depending on the situation)
-	//Because all the nodes of the tree are of the same unique item name, it is useful to consider the expense quantity as the key.
+public class AVLTree<E extends Comparable<E>> {
+	//AVL Tree that belongs to the Invoice Table.
+	//It stores all the invoices that belong to a single person.
+	//No invoice can be repeated. If an invoice is inserted, with an already existing invoice number, the old one is replaced.
+	//Because all the nodes of the tree belong to one person, it is useful to consider the invoice number as the key.
 	class Node{
-		int count;
 		E element;
-		Expense value;
+		Invoice value;
 		Node left,right;
 		int height;
 		
-		private Node(E element, Node left, Node right,Expense value){
+		private Node(E element, Node left, Node right,Invoice value){
 			this.element = element;
 			this.left = this.right = null; 
 			this.height = 1;
 			this.value = value;
-			this.count = 1;
 		}
 		public String toString(){
-			return "["+this.element.toString()+"-"+this.height+"]";
+			return "["+this.element+"-"+this.height+"]";
 		}
 	}	
 	
 	Node root;
 	private final int ALLOWED_IMBALANCE = 1;
 	
-	public AVLTreeMod(){
+	public AVLTree(){
 		this.root = null;
 	}
 	
@@ -38,7 +35,7 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		return node.height;
 	}
 	
-	public Expense getValue(E key){
+	public Invoice getValue(E key){
 		Node node = this.root;
 		int result;
 		while(node != null){
@@ -122,10 +119,10 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		return rightRotate(t);
 	}
 
-	public void insert(E element,Expense value){
+	public void insert(E element,Invoice value){
 		this.root = insert(element,this.root, value);
 	}
-	private Node insert(E element,Node node,Expense value){
+	private Node insert(E element,Node node,Invoice value){
 		if(node == null)
 			return new Node(element,null,null,value);
 		int compareResult = element.compareTo(node.element);
@@ -133,9 +130,6 @@ public class AVLTreeMod<E extends Comparable<E>> {
 			node.left = insert(element,node.left,value);
 		else if (compareResult > 0)
 			node.right = insert(element,node.right,value);
-		else{
-			node.count++;
-		}
 		return balance(node);
 	}
 	
@@ -168,9 +162,9 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		return output;
 	}
 	
-	public Expense remove(E key){
+	public Invoice remove(E key){
 		Node node = this.root;
-		Expense temp;
+		Invoice temp;
 		while(node != null){
 			int cmp = key.compareTo(node.element);
 			if(cmp == 0)
@@ -184,11 +178,8 @@ public class AVLTreeMod<E extends Comparable<E>> {
 			return null;
 		else{
 			temp = node.value;
-			node.count--;
-			if(node.count <= 0){
-				treeDelete(node);
-				balance(node);
-			}
+			treeDelete(node);
+			balance(node);
 		}
 		return temp;
 	}
@@ -254,49 +245,81 @@ public class AVLTreeMod<E extends Comparable<E>> {
 			node = node.right;
 		return node;
 	}
-	
-	//Method that creates a String with the item name and the expense, for all the nodes on the tree and considering repetitions. For Query 3
-	//Example:
-	//Beer 10
-	//Beer 10
-	//Beer 11
-	public String inOrderForSelects(){
+	//Method for query 3. Print all the expenses a person has made
+	public String inOrderForExpenses(){
 		if(root != null){
-			return this.inOrderForSelects(root);
+			return this.inOrderForExpenses(root);
 		}
 		return "";
 	}
-	private String inOrderForSelects(Node node){
+	private String inOrderForExpenses(Node node){
 		if(node == null)
 			return "";
-		String output = this.inOrderForSelects(node.left);
-		for(int i = 1; i <= node.count; i++){
-			output += "\n"+node.value.toString();
+		String output = this.inOrderForExpenses(node.left);
+		AVLTreeMod<Integer> exp;
+		int i = 0, j  = 0;
+		for(exp = node.value.expenses.table[i] ; j < node.value.expenses.getSize() ; exp = node.value.expenses.table[++i]){
+			if(exp != null){
+				output += exp.inOrderForSelects();
+				j++;
+			}
 		}
-		output += this.inOrderForSelects(node.right);
+		output += this.inOrderForExpenses(node.right);
 		return output;
 	}
-	
-	//Get total expenses for this item from the invoice
-	public int getExpensesSum(){
+	//Method for query 4. Print all the payments a person has made
+	public String inOrderForPayments(){
 		if(root != null){
-			return this.getExpensesSum(root);
+			return this.inOrderForPayments(root);
+		}
+		return "";
+	}
+	private String inOrderForPayments(Node node){
+		if(node == null)
+			return "";
+		String output = this.inOrderForPayments(node.left);
+		output += "\n"+ node.value.toStringWOName();
+		output += this.inOrderForPayments(node.right);
+		return output;
+	}
+	//Method for query 5. Print the earnings after expense for a person
+	public String getEarnings(){
+		if(root != null){
+			int totalExpenses, totalPayments;
+			totalExpenses = this.getTotalExpenses(root);
+			totalPayments = this.getTotalPayments(root);
+			return ("Total Expenses: "+ totalExpenses+ "\nTotal Payments: "+ totalPayments+ "\nTotal Earnings: "+ (totalPayments-totalExpenses));
+		}
+		return "";
+	}
+	private int getTotalPayments(Node node){
+		if(node == null)
+			return 0;
+		int totalPayments = this.getTotalPayments(node.left);
+		totalPayments += node.value.payment;
+		totalPayments += this.getTotalPayments(node.right);
+		return totalPayments;
+	}
+	private int getTotalExpenses(Node node){
+		if(node == null)
+			return 0;
+		int totalExpenses = this.getTotalExpenses(node.left);
+		AVLTreeMod<Integer> exp;
+		int i = 0, j  = 0;
+		for(exp = node.value.expenses.table[i] ; j < node.value.expenses.getSize() ; exp = node.value.expenses.table[++i]){
+			if(exp != null){
+				totalExpenses += exp.getExpensesSum();
+				j++;
+			}
+		}
+		totalExpenses += this.getTotalExpenses(node.right);
+		return totalExpenses;
+	}
+	//Method for query 6. Used to obtain total expenses.
+	public int getTotalExpenses(){
+		if(root != null){
+			return this.getTotalExpenses(root);
 		}
 		return 0;
 	}
-	
-	private int getExpensesSum(Node node){
-		if(node == null){
-			return 0;
-		}
-		int output = this.getExpensesSum(node.left);
-		for(int i = 1; i <= node.count; i++){
-			output += node.value.expense;
-		}
-		output += this.getExpensesSum(node.right);
-		return output;
-
-	}
-
-
 }
