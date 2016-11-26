@@ -36,7 +36,7 @@ public class ExpenseTable {
 		AVLTreeMod<Integer>[] newTable = new AVLTreeMod[this.m*2+1];
 		for(int i = 0; i < this.m; i++){
 			if(this.table[i] != null){
-				newTable[hash(this.table[i].root.value.item, this.m*2+1)] = this.table[i];
+				newTable[hash(this.table[i].root.expense.item, this.m*2+1)] = this.table[i];
 			}
 		}
 		this.m = this.m*2+1;
@@ -55,7 +55,7 @@ public class ExpenseTable {
 				this.size++;
 				break;
 			}
-			else if(this.table[i].root.value.item.equals(k)){
+			else if(this.table[i].root.expense.item.equals(k)){
 				this.table[i].insert(item.expense, item);
 				break;
 			}
@@ -69,14 +69,14 @@ public class ExpenseTable {
 		int freeSpace = -1;
 		Expense saved = null;
 		for(int i = h; this.table[i] != null; i = ++i%this.m){
-			if(this.table[i].root != null && this.table[i].root.value.item.equals(k)){
+			if(this.table[i].root != null && this.table[i].root.expense.item.equals(k)){
 				AVLTreeMod<Integer> temp = this.table[i];
 				saved = temp.remove(no);
 				this.table[i] = temp;
 				freeSpace = i;
 				this.size--;
 			}
-			else if(freeSpace != -1 && this.hash(this.table[i].root.value.item)==(h)){
+			else if(freeSpace != -1 && this.hash(this.table[i].root.expense.item)==(h)){
 					this.table[freeSpace] = this.table[i];
 					this.table[i] = null;
 					freeSpace = i;
@@ -89,7 +89,7 @@ public class ExpenseTable {
 			else if(i == freeSpace && this.table[i] == null){
 				continue;
 			}
-			else if(this.table[i].root!=null && this.hash(this.table[i].root.value.item) < freeSpace){
+			else if(this.table[i].root!=null && this.hash(this.table[i].root.expense.item) < freeSpace){
 				this.table[freeSpace] = this.table[i];
 				this.table[i] = null;
 				freeSpace = i;
@@ -101,8 +101,8 @@ public class ExpenseTable {
 	public Expense getValue(String k) {
 		int h = this.hash(k);
 		for(AVLTreeMod<Integer> n = table[h]; n != null; n = table[++h%this.m]){
-			if(n.root.value.item.equals(k)){
-				return n.root.value;
+			if(n.root.expense.item.equals(k)){
+				return n.root.expense;
 			}
 		}
 		return null;
@@ -129,7 +129,7 @@ public class ExpenseTable {
 	public void output(){
 		for(int i = 0; i < this.m; i++){
 			if(this.table[i]!=null){
-				System.out.print(this.table[i].root.value.toString()+"   ");
+				System.out.print(this.table[i].root.expense.toString()+"   ");
 			}
 			else{
 				System.out.print(this.table[i]+"   ");
@@ -141,8 +141,8 @@ public class ExpenseTable {
 	public Expense getExpense(String k,Integer i) {
 		int h = this.hash(k);
 		for(AVLTreeMod<Integer> n = this.table[h]; n != null; n = this.table[++h%this.m]){
-			if(n.root.value.item.equals(k)){
-				return n.getValue(i);
+			if(n.root.expense.item.equals(k)){
+				return n.getExpense(i);
 			}
 		}
 		return null;
