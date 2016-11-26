@@ -4,7 +4,8 @@ package projectDB;
  * <b>class AVLTree</b>
  * <p>
  * The purpose of this class is to store all the invoice entries of the Invoice Table that belong to a single person.
- * It uses an AVL Tree data structure to store all the entries of the table. 
+ * It uses an AVL Tree data structure to store all the entries of the table.
+ * <br>Because all the nodes of the tree are of the same unique person, it is useful to consider the invoiceNo as the key for each node.
  * @param <E> - Element that extends Comparable (Usually will be an integer). It will act as key for each entry (node) of the tree.
  * @author MiguelMontoya - ArturoFornes
  */
@@ -15,8 +16,8 @@ public class AVLTree<E extends Comparable<E>> {
 	
 	/**
 	 * <b>AVLTree</b>
-	 * <p>
-	 * Constructor for the class AVLTree.
+	 * <br><i>public AVLTree()</i>
+	 * <p>Constructor for the class AVLTree.
 	 * <br>It initializes the tree's root to null.
 	 */
 	public AVLTree(){
@@ -114,6 +115,7 @@ public class AVLTree<E extends Comparable<E>> {
 		left.height = Math.max(height(left.left),height(left.right))+1;
 		return left;
 	}
+	
 	/**
 	 * <b>leftRotate</b>
 	 * <br><i>private Node leftRotate(Node t)</i>
@@ -169,7 +171,7 @@ public class AVLTree<E extends Comparable<E>> {
 
 	/**
 	 * <b>insert</b>
-	 * <br><i>public void insert(E element,Invoice value)</i>
+	 * <br><i>public void insert(E element, Invoice value)</i>
 	 * <p>Method to insert a new node with the selected invNo (key) and invoice entry. 
 	 * In the recursive method, its decided the position for the new node. If a node with the same key (invNo) is found, it is replaced.
 	 * @param invNo - (E) invoiceNumber (key) of the new node of the AVLTree
