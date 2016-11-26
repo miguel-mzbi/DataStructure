@@ -12,6 +12,6 @@ public class Expense {
 	}
 	
 	public String toString(){
-		return this.item+" "+this.expense;
+		return this.item+" - "+this.expense;
 	}
 }
