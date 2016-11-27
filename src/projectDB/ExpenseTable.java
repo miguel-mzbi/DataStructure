@@ -105,7 +105,15 @@ public class ExpenseTable {
 		return null;
 	}
 
-	public Expense remove(String k,Integer no) {
+	/**
+	 * <b>remove</b>
+	 * <br><i>public Expense remove(String k, Integer no)</i>
+	 * <p>Removes node with selected key (Item name) and expense value.
+	 * @param k - (String) Key to remove of the table. It's the item's name.
+	 * @param no - (Integer) Integer, expense value
+	 * @return Full removed expense entry. Null if not found.
+	 */
+	public Expense remove(String k, Integer no) {
 		int h = this.hash(k);
 		int freeSpace = -1;
 		Expense saved = null;
@@ -139,6 +147,13 @@ public class ExpenseTable {
 		return saved;
 	}
 
+	/**
+	 * <b>getValue</b>
+	 * <br><i>public Expense getValue(String k)</i>
+	 * <p>Obtains node with selected key (Item name). This methods provides the root. Not a specific expense.
+	 * @param k - (String) Key of the entry to get value
+	 * @return Obtained expense entry. Null if not found.
+	 */
 	public Expense getValue(String k) {
 		int h = this.hash(k);
 		for(AVLTreeMod<Integer> n = table[h]; n != null; n = table[++h%this.m]){
@@ -149,23 +164,76 @@ public class ExpenseTable {
 		return null;
 	}
 
+	/**
+	 * <b>contains</b>
+	 * <br><i>public boolean contains(String k)</i>
+	 * <p>Checks for the existence of a key in the table.
+	 * @param k - (String) Key, item's name, to check if exists in the table.
+	 * @return Boolean, true if the key exists.
+	 */
 	public boolean contains(String k) {
 		return this.getValue(k) != null;
 	}
 
+	/**
+	 * <b>isEmpty</b>
+	 * <br><i>public boolean isEmpty()</i>
+	 * <p>Checks if the table is empty.
+	 * @return Boolean, true if table is empty.
+	 */
 	public boolean isEmpty() {
 		return this.size == 0;
 	}
 
+	/**
+	 * <b>getSize</b>
+	 * <br><i>public int getSize()</i>
+	 * <p>Obtains the number of entries in the table.
+	 * @return Integer, number of entries.
+	 */
 	public int getSize() {
 		return this.size;
 	}
 
+	/**
+	 * <b>clear</b>
+	 * <br><i>public void clear()</i>
+	 * <p>Removes every entry of the table.
+	 */
 	public void clear() {
 		for(int i = 0; i < this.m; i++){
 			this.table[i] = null;
 		}
 	}
+	
+	/**
+	 * <b>getExpense</b>
+	 * <br><i>public Expense getExpense(String k, Integer i)</i>
+	 * <p>Obtains node with selected key (Item name) and selected expense value.
+	 * @param k - (String) Desired item name
+	 * @param i - (Integer) Desired expense value
+	 * @return Full expense entry with desired values. Null if not found.
+	 */
+	public Expense getExpense(String k, Integer i) {
+		int h = this.hash(k);
+		for(AVLTreeMod<Integer> n = this.table[h]; n != null; n = this.table[++h%this.m]){
+			if(n.root.expense.item.equals(k)){
+				return n.getExpense(i);
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * <b>insertExpense</b>
+	 * <br><i>public void insertExpense(Expense expense)</i>
+	 * <p>Inserts new Expense to the Hash Table
+	 * @param expense - (Expense) New Expense entry to add.
+	 */
+	public void insertExpense(Expense expense){
+		this.add(expense.item, expense);
+	}
+	
 	//Just for debugging purpose.
 	public void output(){
 		for(int i = 0; i < this.m; i++){
@@ -177,19 +245,5 @@ public class ExpenseTable {
 			}
 		}
 		System.out.println();
-	}
-	
-	public Expense getExpense(String k,Integer i) {
-		int h = this.hash(k);
-		for(AVLTreeMod<Integer> n = this.table[h]; n != null; n = this.table[++h%this.m]){
-			if(n.root.expense.item.equals(k)){
-				return n.getExpense(i);
-			}
-		}
-		return null;
-	}
-	
-	public void insertExpense(Expense expense){
-		this.add(expense.item, expense);
 	}
 }
