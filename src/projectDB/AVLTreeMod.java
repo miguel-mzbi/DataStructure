@@ -10,11 +10,7 @@ package projectDB;
  * @author MiguelMontoya - ArturoFornes
  */
 public class AVLTreeMod<E extends Comparable<E>> {
-	//AVL Tree that belongs to the Expenses Table.
-	//It stores all the expenses where the item name is the same. 
-	//Remember that the AVL Tree is stores in a hash map for the expenses of only one invoice.
-	//Because an exact expense can be repeated, instead of inserting a new node in the tree, a counter for the node is increased or decreased (Depending on the situation)
-	//Because all the nodes of the tree are of the same unique item name, it is useful to consider the expense quantity as the key.
+
 	Node root;
 	private final int ALLOWED_IMBALANCE = 1;
 	
@@ -376,7 +372,6 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		return output;
 	}
 	
-	//Get total expenses for this item from the invoice
 	/**
 	 * <b>getExpensesSum</b>
 	 * <br><i>public int getExpensesSum()</i>
@@ -399,14 +394,14 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		}
 		output += this.getExpensesSum(node.right);
 		return output;
-
 	}
 	
 	/**
 	 * <b>class Node</b>
 	 * <br>Inner Class of AVLTreeMod
-	 * <p>
-	 * Each node (Entry) contains the expense quantity as key for the node, and the expense entry.
+	 * <p>Each node (Entry) contains the expense quantity as key for the node, and the expense entry.
+	 * <br>Because an exact expense can be repeated, instead of inserting a new node in the tree, 
+	 * a counter for the node is increased or decreased (Depending on the situation)
 	 * @author MiguelMontoya - ArturoFornes
 	 */
 	class Node{
@@ -419,8 +414,7 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		/**
 		 * <b>Node</b>
 		 * <br><i>public Node(E invoiceNo, Node left, Node right, Invoice invoice)</i>
-		 * <p>
-		 * Constructor for the inner class node
+		 * <p>Constructor for the inner class node
 		 * @param quantity - (E) Key of the node, stores the expense quantity
 		 * @param left - (Node) Stores the left child of the current node.
 		 * @param right - (Node) Stores the right child of the current node.
