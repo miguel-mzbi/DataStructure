@@ -3,7 +3,7 @@ package projectDB;
 /**
  * <b>class AddressTable</b>
  * <p>The purpose of this class is to store all the person entries of the Address Table (Table 1).
- * It uses an AVL Tree data structure to store all the entries.
+ * It uses a HashMap structure to store all the entries.
  * <br>Each entry has a key (The name of the person) and a value (The address of the person).
  * @author MiguelMontoya - ArturoFornes
  */
@@ -78,7 +78,7 @@ public class AddressTable {
 	/**
 	 * <b>add</b>
 	 * <br><i>public String add(String k, String item)</i>
-	 * <p>Adds a node<Key, Value> to the table.
+	 * <p>Adds a node<k, item> to the table.
 	 * If max is reached (Not capacity), rehashing is called before adding the new node<k, item>
 	 * @param k - (String) Key to add into node. It's the name of person.
 	 * @param item - (String) Item to add into node. It's the address of the person.
