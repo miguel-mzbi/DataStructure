@@ -147,7 +147,7 @@ public class AddressTable {
 	/**
 	 * <b>getValue</b>
 	 * <br><i>public String getValue(String k)</i>
-	 * <p>Removes node with selected key (Person's name).
+	 * <p>Obtains node with selected key (Person's name).
 	 * @param k - (String) Key of the entry to get value
 	 * @return Value of the entry with the desired key. Returns null if no entry is found.
 	 */
