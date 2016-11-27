@@ -4,10 +4,11 @@ package projectDB;
  * <b>class Expense</b>
  * <p>The purpose of this class is to store the values of each expense.
  * Each expense is stored in the class AVLTreeMod.
- * <br>Because every AVLTree is stored in a HashTable, for only one invoice, it's not necesary to store the invoice value.
+ * <br>Because every AVLTree is stored in a HashTable, for only one invoice, it's not necessary to store the invoice value.
  * @author MiguelMontoya - ArturoFornes
  */
 public class Expense {
+	
 	String item;
 	int expense;
 	
