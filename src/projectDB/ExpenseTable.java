@@ -36,6 +36,7 @@ public class ExpenseTable {
 		this.size = 0;
 		this.table = new AVLTreeMod[capacity];
 	}
+	
 	/**
 	 * <b>hash</b>
 	 * <br><i>private int hash(String k)</i>
