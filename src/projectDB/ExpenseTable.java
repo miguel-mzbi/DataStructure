@@ -1,36 +1,69 @@
 package projectDB;
 
+/**
+ * <b>class ExpenseTable</b>
+ * <p>The purpose of this class is to store all the expense entries of a unique invoice (Table 3).
+ * It uses a HashMap structure to store all the entries. Each entry is an AVL Tree (AVLTreeMod class) that stores all the expenses of a unique item name.
+ * <br>Each entry has a key (The name of the item) and a value (The complete expense entry).
+ * @author MiguelMontoya - ArturoFornes
+ */
 public class ExpenseTable {
-	//Data Structure for the table of expenses (Table 3)
-	//A table for expenses is created for each invoice number. This means that all the entries on a expense table will belong to the same invoice number.
-	//Each entry on the hash map has the item name as key.
-	//Because each item can be registered multiple times with varying price, each entry in the map is in reality an AVL Tree
-	//The AVL contains the item name and the expense.
-	//A special AVL was constructed to consider the case in which a expense is inserted with the same expense ($) for a unique item. 
-	//Instead of replacing it, it adds to a counter of repetitions.
+
 	int m;
 	private int size;
 	AVLTreeMod<Integer>[] table;
 	
+	/**
+	 * <b>ExpenseTable</b>
+	 * <br><i>public ExpenseTable()</i>
+	 * <p>Constructor for the class ExpenseTable.
+	 * <br>It initializes the table's size to the default value.
+	 */
 	public ExpenseTable(){
 		this(101);
 	}
 	
+	/**
+	 * <b>ExpenseTable</b>
+	 * <br><i>public AddressTable()</i>
+	 * <p>Constructor for the class ExpenseTable.
+	 * <br>It initializes the table's size to the given capacity.
+	 * @param capacity - (Int) Integer with the desired capacity for the table.
+	 */
 	@SuppressWarnings("unchecked")
 	public ExpenseTable(int capacity){
 		this.m = capacity;
 		this.size = 0;
 		this.table = new AVLTreeMod[capacity];
 	}
-	
-	int hash(String k){
+	/**
+	 * <b>hash</b>
+	 * <br><i>private int hash(String k)</i>
+	 * <p>Gives a hash value for the selected key
+	 * @param k - (String) Key to hash
+	 * @return Integer hash value for key
+	 */
+	private int hash(String k){
 		return (k.hashCode() & 0x7FFFFFFF) % this.m;
 	}
 	
+	/**
+	 * <b>hash</b>
+	 * <br><i>private int hash(String k, int m)</i>
+	 * <p>Gives a hash value for the selected key
+	 * @param k - (String) Key to hash
+	 * @param m - (Integer) New size of the table
+	 * @return Integer hash value for the key
+	 */
 	private int hash(String k, int m){
 		return (k.hashCode() & 0x7FFFFFFF) % m;
 	}
 	
+	/**
+	 * <b>resize</b>
+	 * <br><i>private void resize()</i>
+	 * <p>Creates new table, if max capacity is reached
+	 */
 	@SuppressWarnings("unchecked")
 	private void resize(){
 		AVLTreeMod<Integer>[] newTable = new AVLTreeMod[this.m*2+1];
@@ -43,7 +76,16 @@ public class ExpenseTable {
 		this.table = newTable;
 	}
 	
-	public Invoice add(String k, Expense item) {
+	/**
+	 * <b>add</b>
+	 * <br><i>public Expense add(String k, Expense item)</i>
+	 * <p>Adds a node<k, item> to the table.
+	 * If max is reached (Not capacity), rehashing is called before adding the new node<k, item>
+	 * @param k - (String) Key to add into node. It's the name of the item.
+	 * @param item - (Expense) Item to add into node. It's the full expense entry.
+	 * @return Expense, always returns null, because if the new entry is repeated, a counter is incremented. The entry is not replaced.
+	 */
+	public Expense add(String k, Expense item) {
 		if(this.size >= this.m-1 || (this.size+0.0)/(this.m) >= 0.75){
 			this.resize();
 		}
@@ -60,7 +102,6 @@ public class ExpenseTable {
 				break;
 			}
 		}
-		
 		return null;
 	}
 
