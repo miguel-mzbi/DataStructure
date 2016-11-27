@@ -3,7 +3,8 @@ package projectDB;
 /**
  * <b>class AVLTreeMod</b>
  * <p>The purpose of this class is to store all the expense entries of the Expense Table where the item name is the same.
- * It uses an AVL Tree data structure to store all the entries with the same item name.
+ * It uses an AVL Tree data structure to store all the entries with the same item name. 
+ * If a same expense of a item is inserted, the entry is no replaced, but a counter for that entry is increased
  * <br>Because all the nodes of the tree are of the same unique item name, it is useful to consider the expense quantity as the key for each node.
  * <br>Remember that the rest of expenses of other items, are stored in the hash map, where this AVLTree belongs to. 
  * @param <E> - Element that extends Comparable (Usually will be an integer). It will act as key for each entry (node) of the tree.
