@@ -431,8 +431,7 @@ public class AVLTreeMod<E extends Comparable<E>> {
 		/**
 		 * <b>toString</b>
 		 * <br><i>public String toString()</i>
-		 * <p>
-		 * Provides String with the expenseQty (Key) and the height of the node.
+		 * <p>Provides String with the expenseQty (Key) and the height of the node.
 		 * @return String as: [expenseQty - height]
 		 */
 		public String toString(){
