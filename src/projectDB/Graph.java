@@ -1,18 +1,37 @@
 package projectDB;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 
+/**
+ * <b>class Graph</b>
+ * <p>The purpose of this class is to store the difference of expense a person has with the rest of people.
+ * The graph data structure is utilized.
+ * @author MiguelMontoya - ArturoFornes
+ */
 public class Graph {
 	HashMap<String,Vertex> vertexMap;
 	final double maxValue = Double.MAX_VALUE;
 	
+	/**
+	 * <b>Graph</b>
+	 * <br><i>public Graph()</i>
+	 * <p>Constructor for the class Graph.
+	 * <br>The HashMap for all the vertex is initialized.
+	 */
 	public Graph(){
 		vertexMap = new HashMap<String,Vertex>();
 	}
 	
+	
+	/**
+	 * <b>getVertex</b>
+	 * <br><i>public Vertex getVertex(String name)</i>
+	 * <p>Gets the vertex, given a name.
+	 * <br>If no vertex is found, a new vertex is created.
+	 * @param name - (String) Name of the person, whose vertex is requested.
+	 * @return Vertex with the requested name.
+	 */
 	public Vertex getVertex(String name){
 		Vertex toReturn = this.vertexMap.get(name);
 		if(toReturn != null)
@@ -22,12 +41,28 @@ public class Graph {
 		return toAdd;
 	}
 	
+	/**
+	 * <b>addEdge</b>
+	 * <br><i>public void addEdge(String origin, String destination, double cost)</i>
+	 * <p>Adds an edge between two vertex.
+	 * @param origin - (String) Name of the vertex's origin.
+	 * @param destination - (String) Name of the vertex's destination.
+	 * @param cost - (Double) The expense difference between two people.
+	 */
 	public void addEdge(String origin, String destination, double cost){
 		Vertex v = this.getVertex(origin);
 		Vertex w = this.getVertex(destination);
 		v.adjList.add(new Edge(w,cost));
 	}
 	
+	/**
+	 * <b>changeEdge</b>
+	 * <br><i>public void changeEdge(String origin, String destination, double cost)</i>
+	 * <p>Changes the value of an existing edge.
+	 * @param origin - (String) Name of the vertex's origin.
+	 * @param destination - (String) Name of the vertex's destination.
+	 * @param cost - (Double) The expense difference between two people.
+	 */
 	public void changeEdge(String origin, String destination, double cost){
 		Vertex v = this.getVertex(origin);
 		Vertex w = this.getVertex(destination);
@@ -41,6 +76,13 @@ public class Graph {
 		this.addEdge(origin, destination, cost);
 	}
 	
+	/**
+	 * <b>removeEdge</b>
+	 * <br><i>public void removeEdge(String origin, String destination)</i>
+	 * <p>Removes an edge between two vertex.
+	 * @param origin - (String) Name of the vertex's origin.
+	 * @param destination - (String) Name of the vertex's destination.
+	 */
 	public void removeEdge(String origin, String destination){
 		Vertex v = this.getVertex(origin);
 		Vertex w = this.getVertex(destination);
@@ -53,6 +95,12 @@ public class Graph {
 		}
 	}
 	
+	/**
+	 * <b>removeVertex</b>
+	 * <br><i>public void removeVertex(String name)</i>
+	 * <p>Removes the given vertex.
+	 * @param name - (String) Name of the vertex to remove
+	 */
 	public void removeVertex(String name){
 		for(Map.Entry<String, Vertex> u: this.vertexMap.entrySet()){
 			if(!u.getValue().name.equals(name))
@@ -61,6 +109,14 @@ public class Graph {
 		vertexMap.remove(name);
 	}
 	
+	/**
+	 * <b>getCost</b>
+	 * <br><i>public double getCost(String origin, String destination)</i>
+	 * <p>Gets the cost (Expense difference) between two vertex.
+	 * @param origin - (String) Name of the vertex's origin.
+	 * @param destination - (String) Name of the vertex's destination.
+	 * @return Cost (Expense difference) between two vertex.
+	 */
 	public double getCost(String origin, String destination){
 		Vertex v = this.getVertex(origin);
 		Vertex w = this.getVertex(destination);
@@ -71,73 +127,5 @@ public class Graph {
 			}
 		}
 		return 0;
-	}
-	
-	public String breadthFirstSearch(String origin){
-		String output = "";
-		Vertex s = this.getVertex(origin);
-		for(Map.Entry<String, Vertex> u: this.vertexMap.entrySet()){
-			Vertex vertex = u.getValue();
-			vertex.color = 1;
-			vertex.pi = null;
-			vertex.distance = this.maxValue;
-		}
-		s.color = 0;
-		s.distance = 0;
-		s.pi = null;
-		
-		Queue<Vertex> q = new LinkedList<Vertex>();
-		q.add(s);
-		while(!q.isEmpty()){
-			Vertex u = q.poll();
-			output+=u.name;
-			int size = u.adjList.size();
-			for(int i = 0;i < size; i++){
-				Vertex v = u.adjList.get(i).destination;
-				if(v.color == 1){
-					v.color = 0;
-					v.distance = u.distance +1;
-					v.pi = u;
-					q.add(v);
-				}
-			}
-			u.color = -1;
-		}
-		
-		return output;
-	}
-	
-	public String depthFirstSearch(String origin){
-		String output = "";
-		Vertex s = this.getVertex(origin);
-		for(Map.Entry<String, Vertex> u: this.vertexMap.entrySet()){
-			Vertex vertex = u.getValue();
-			vertex.color = 1;
-			vertex.pi = null;
-			vertex.distance = this.maxValue;
-		}
-		int time = 0;
-		output+=DFSVisit(time,s);
-		return output;
-	}
-	
-	public String DFSVisit(int time, Vertex u){
-		String output = "";
-		time = time+1;
-		u.distance = time;
-		u.color = 0;
-		int size = u.adjList.size();
-		for(int i = 0;i < size; i++){
-			Vertex v = u.adjList.get(i).destination;
-			if(v.color == 1){
-				v.pi = u;
-				output+=DFSVisit(time,v);
-			}
-		}
-		u.color = -1;
-		time = time+1;
-		u.distance = time;
-		output+=u.name;
-		return output;
 	}
 }
