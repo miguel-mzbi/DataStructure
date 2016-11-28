@@ -2,7 +2,7 @@ package projectDB;
 
 /**
  * <b>class ExpenseTable</b>
- * <p>The purpose of this class is to store all the expense entries of a unique invoice (Table 3).
+ * <p>The purpose of this class is to store all the expense entries of a unique invoice (Table 2).
  * It uses a HashMap structure to store all the entries. Each entry is an AVL Tree (AVLTreeMod class) that stores all the expenses of a unique item name.
  * <br>Each entry has a key (The name of the item) and a value (The complete expense entry).
  * @author MiguelMontoya - ArturoFornes
