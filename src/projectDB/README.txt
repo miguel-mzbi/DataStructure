@@ -1,9 +1,9 @@
 Worst case time complexities for methods in DataBase.java
 
-insertInvoice() - O(n)
+insertInvoice() - O(n log n)
 O(n) for the insertion in the HashTable and O(log n) for the insertion in the AVL.
 
-getInvoice() - O(n)
+getInvoice() - O(n log n)
 O(n) for the search in the HashTable and O(log n) for the search in the AVL.
 
 deleteInvoice() - O(n²)
@@ -24,7 +24,7 @@ O(n) for the search in the Invoice HashTable, O(log n) for the search in the Inv
 O(n) for the insertion in the Expense HashTable and O(log n) for the insertion in the Expense AVL,
 and O(n²) for the update of the graph.
 
-getExpense() - O(n)
+getExpense() - O(n log n)
 O(n) for the search in the Invoice HashTable, O(log n) for the search in the Invoice AVL,
 O(n) for the search in the Expense HashTable and O(log n) for the search in the Expense AVL.
 
@@ -64,15 +64,15 @@ O(n) for the search in the Expense HashTable
 and O(n²) for the sum of all expenses,
 and O(1) for the difference.
 
-updateEdge() - O(n+E)
+updateEdge() - O(V+E)
 Twice (Alternating origin and destination):
-O(n) for the search in the vertex table, O(E) for the search of the edge.
+O(V) for the search in the vertex table, O(E) for the search of the edge.
 
-updateGraph() - O(n²)
+updateGraph() - O(VE)
 Going through all vertices and all edges.
 
-removeFromGraph() - (n²)
+removeFromGraph() - (VE)
 Removing vertex of all edges of all vertices.
 
-getDifferenceGraph() - O(n+E)
-O(n) for the search of the vertex and O(E) for the search of the edge.
+getDifferenceGraph() - O(V+E)
+O(V) for the search of the vertex and O(E) for the search of the edge.
